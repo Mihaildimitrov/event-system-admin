@@ -1,0 +1,7 @@
+<app-main-navigation *ngIf="isUserLogged"></app-main-navigation>
+
+<main id="main" class="">
+    <router-outlet></router-outlet>
+</main>
+
+<app-main-footer *ngIf="isUserLogged"></app-main-footer>

@@ -1,0 +1,176 @@
+.mb-container {
+    padding: 10px;
+    .mb-col {
+        fieldset {
+            min-height: calc(100vh - 150px);
+            display: block;
+            margin-inline-start: 2px;
+            margin-inline-end: 2px;
+            padding-block-start: 0.35em;
+            padding-inline-start: 0.75em;
+            padding-inline-end: 0.75em;
+            padding-block-end: 0.625em;
+            min-inline-size: min-content;
+            border-width: 2px;
+            border-style: solid;
+            border-color: threedface;
+            border-image: initial;
+            border-color: #ced4da;
+            border-radius: 10px;
+            border-width: 1px;
+            margin: 10px;
+            legend {
+                font-weight: bold;
+                padding: 10px;
+            }
+        }
+    }
+    .premium-features {
+        .vertical-a-m {
+            border-bottom: 1px solid #1d2531;
+            padding: 10px;
+        }
+        h6 {
+            font-size: .9rem;
+            font-weight: bold;
+        }
+        p {
+            font-size: .7rem;
+        }
+    }
+    .save-features-container {
+        padding: 10px;
+        small {
+            font-size: 1rem;
+            font-weight: bold;
+            padding-right: 10px;
+        }
+        mat-spinner {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+}
+
+.save-features-container ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #e9760a;
+}
+
+.content-view-loading-inner ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #25303f;
+}
+
+#available-features-list,
+#selected-features-list {
+    min-height: 300px;
+}
+
+.feature-list-item {
+    border: 1px solid #1d2531;
+    background: #1d2531;
+    color: #fff;
+    padding: 10px 10px;
+    border-radius: 5px;
+    margin: 2px auto;
+    cursor: -webkit-grab;
+    cursor: grab;
+    &:hover {
+        background: #25303f;
+        box-shadow: 1px 1px 1px #25303f;
+    }
+    .feature-list-item-title {
+        display: inline-block;
+        width: 70%;
+        i {
+            font-size: 1.4rem;
+            vertical-align: middle;
+            width: 15%;
+        }
+    }
+    .feature-list-item-options {
+        display: inline-block;
+        width: 30%;
+        text-align: right;
+        i {
+            font-size: 1.3rem;
+            vertical-align: middle;
+            padding: 0 5px;
+            transition: 0.3s;
+            opacity: 0.7;
+            &:hover {
+                font-size: 1.35rem;
+                opacity: 1;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.cdk-drop-list-dragging .cdk-drag {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-animating {
+    transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.save-feature-container ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #e9760a;
+}
+
+#event-langs-nav ::ng-deep .mat-ink-bar,
+.mat-ink-bar {
+    background-color: rgb(36, 36, 36);
+}
+
+.save-feature-container {
+    padding: 0 10px;
+    small {
+        display: inline-block;
+        padding-right: 5px;
+        font-size: 1rem;
+        font-weight: bold;
+        padding-right: 10px;
+    }
+    .mat-spinner {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+#edit_event_feature_modal {
+    .form-container {
+        label {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        input[type=text],
+        input[type=date],
+        textarea,
+        select {
+            display: block;
+            width: 100%;
+            display: block;
+            width: 100%;
+            padding: 0.375rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+    }
+    .curr-lang-label {
+        font-size: 1rem;
+        font-style: italic;
+        text-transform: lowercase;
+        font-weight: bold;
+    }
+}

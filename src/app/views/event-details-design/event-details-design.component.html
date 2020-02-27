@@ -1,0 +1,285 @@
+<div *ngIf="stillLoadingContent" class="mb-container content-view-loading-outer">
+    <div class="content-view-loading-inner">
+        <mat-spinner [diameter]="30"></mat-spinner>
+    </div>
+</div>
+
+<div *ngIf="!stillLoadingContent" class="event-design-container">
+
+    <mat-tab-group animationDuration="0ms" mat-align-tabs="left" (selectedTabChange)="tabChanged($event)">
+        <mat-tab style="min-height: calc(100vh - 100px) !important;" label="Design" class="main-design-box">
+
+            <div style="min-height: calc(100vh - 100px) !important;" class="colors-form padding-10">
+
+                <div class="event-design-nav text-align-right">
+                    <button (click)="saveEventDesign()" class="button">Save Design</button>
+                    <div *ngIf="isSavingEventDesign" class="save-design-container">
+                        <small>Saving... </small>
+                        <mat-spinner [diameter]="30"></mat-spinner>
+                    </div>
+                    <div *ngIf="saveDesignShowSuccessMsg">
+                        <span class="alert_message_success">Event Design was successfully saved!</span>
+                    </div>
+                </div>
+
+                <fieldset>
+                    <legend>Event Colors:</legend>
+
+                    <div class="mb-row">
+
+                        <div class="mb-col">
+                            <label>Event Primary Text Color:
+                                <input type="custom_color" 
+                                        [value]="design.primaryTextColor" 
+                                        [style.background]="design.primaryTextColor" 
+                                        [cpCancelButton]="true" 
+                                        [(colorPicker)]="design.primaryTextColor"/>
+                            </label>
+
+                            <label>Event Primary Background Color:
+                                <input type="custom_color" [value]="design.primaryBackgroundColor"
+                                        [style.background]="design.primaryBackgroundColor"
+                                        [cpCancelButton]="true"
+                                        [(colorPicker)]="design.primaryBackgroundColor"/>
+                            </label>
+                        </div>
+
+                        <div class="mb-col">
+                            <label>Event Page Text Color:
+                                <input type="custom_color" [value]="design.pageTextColor"
+                                [style.background]="design.pageTextColor"
+                                [cpCancelButton]="true"
+                                [(colorPicker)]="design.pageTextColor"/>
+                            </label>
+
+                            <label>Event Page Background Color:
+                                <input type="custom_color" [value]="design.pageBackgroundColor"
+                                [style.background]="design.pageBackgroundColor"
+                                [cpCancelButton]="true"
+                                [(colorPicker)]="design.pageBackgroundColor"/>
+                            </label>
+
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <fieldset>
+                    <legend>Event Images:</legend>
+
+                    <div class="mb-row">
+
+                        <div class="mb-col">
+                          <div class="input-file-label">Event Icon image:</div>
+                          <div class="image-preview-container">
+                              <img src="{{design.iconImg}}" alt="Icon image">
+                          </div>
+                          <input class="input-file-upload" id="event-design-icon-image" type="file" (change)="onIconImageSelected($event)">
+                          <label class="upload-new-img-spinner-label" for="event-design-icon-image">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                              <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/>
+                            </svg>
+                            <span>Choose a file</span>
+                          </label>
+                          <div *ngIf="uploadingNewIconImage" class="upload-new-img-spinner">
+                            <mat-spinner [diameter]="30"></mat-spinner>
+                          </div>
+                        </div>
+
+                        <div class="mb-col">
+                            <div class="input-file-label">Event Cover image:</div>
+                            <div class="image-preview-container">
+                                <img src="{{design.coverImg}}" alt="Icon image">
+                            </div>
+                            <input class="input-file-upload" id="event-design-cover-image" type="file" (change)="onCoverImageSelected($event)">
+                            <label class="upload-new-img-spinner-label" for="event-design-cover-image">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                              <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/>
+                            </svg>
+                            <span>Choose a file</span>
+                          </label>
+                          <div *ngIf="uploadingNewCoverImage" class="upload-new-img-spinner">
+                            <mat-spinner [diameter]="30"></mat-spinner>
+                          </div>
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+
+            </div>
+
+        </mat-tab>
+
+        <mat-tab style="min-height: calc(100vh - 100px) !important;" label="Home Screen" class="home-screen-box">
+
+          <div style="min-height: calc(100vh - 100px) !important;" *ngIf="stillLoadingHomePageContent" class="mb-container content-view-loading-outer">
+              <div class="content-view-loading-inner">
+                  <mat-spinner [diameter]="30"></mat-spinner>
+              </div>
+          </div>
+
+          <div *ngIf="!stillLoadingHomePageContent" style="min-height: calc(100vh - 100px) !important;" class="home-page-edit padding-10">
+            
+            <div class="event-home-page-nav text-align-right">
+              <button (click)="saveHomePageData()" class="button">Save Home Page</button>
+              <div *ngIf="isSavingEventHomePage" class="save-home-page-container">
+                  <small>Saving... </small>
+                  <mat-spinner [diameter]="30"></mat-spinner>
+              </div>
+              <div *ngIf="saveHomePageShowSuccessMsg">
+                  <span class="alert_message_success">Event Home Page was successfully saved!</span>
+              </div>
+            </div>
+
+            
+            <fieldset>
+              <legend>Home page Settings:</legend>
+
+              <div id="event-langs-nav">
+                <mat-tab-group animationDuration="0ms">
+                    <mat-tab *ngFor="let lang of eventSettings.event_languages" label="{{lang}}">
+                      
+                      <label>Title in <span class="curr-lang-label">{{lang}}</span>:
+                        <input 
+                            [value]="getHomePageTitleForCurrentLang(lang)"
+                            (input)="setHomePageTitleForCurrentLang(lang, $event.target.value)"
+                            required 
+                            type="text">
+                      </label>
+
+                      <label>Description in <span class="curr-lang-label">{{lang}}</span>:
+                        <textarea 
+                            [value]="getHomePageDescriptionForCurrentLang(lang)"
+                            (input)="setHomePageDescriptionForCurrentLang(lang, $event.target.value)"
+                            required 
+                            cols="30" 
+                            rows="5">
+                        </textarea>
+                      </label>
+                      
+                      <div class="mb-row">
+                          <div class="mb-col">
+                            <div class="input-file-label">Event Icon image:</div>
+                            <div class="image-preview-container">
+                                <img class="homepage-cover" src="{{homePageData.cover_img}}" alt="Icon image">
+                            </div>
+                            <input class="input-file-upload" id="event-homepage-cover-image" type="file" (change)="onHomePageCoverImageSelected($event)">
+                            <label class="upload-new-img-spinner-label" for="event-homepage-cover-image">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                                <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/>
+                              </svg>
+                              <span>Choose a file</span>
+                            </label>
+                            <div *ngIf="uploadingNewHomePageCoverImage" class="upload-new-img-spinner">
+                              <mat-spinner [diameter]="30"></mat-spinner>
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="mb-row pading-top-10">
+
+                        <div class="mb-col">
+                          <label class="display-block">Hide Title: </label>
+                          <label class="switch">
+                            <input 
+                                type="checkbox" 
+                                [checked]="homePageData.hideTitle"
+                                #hideTitleCheckbox
+                                (change)="homePageData.hideTitle = hideTitleCheckbox.checked">
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                        <div class="mb-col">
+                          <label class="display-block">Hide Description: </label>
+                          <label class="switch">
+                            <input 
+                                type="checkbox" 
+                                [checked]="homePageData.hideDescription"
+                                #hideDescriptionCheckbox
+                                (change)="homePageData.hideDescription = hideDescriptionCheckbox.checked">
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                        <div class="mb-col">
+                          <label class="display-block">Hide Cover Image: </label>
+                          <label class="switch">
+                            <input 
+                                type="checkbox" 
+                                [checked]="homePageData.hideCoverImage"
+                                #hideCoverImageCheckbox
+                                (change)="homePageData.hideCoverImage = hideCoverImageCheckbox.checked">
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                        <div class="mb-col">
+                            <label class="display-block">Hide GRID Icons: </label>
+                            <label class="switch">
+                              <input 
+                                  type="checkbox" 
+                                  [checked]="homePageData.hideGridIcon"
+                                  #hideGridIconCheckbox
+                                  (change)="homePageData.hideGridIcon = hideGridIconCheckbox.checked">
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+
+                      </div>
+
+                      <div class="mb-row pading-top-10">
+
+                          
+                          <div class="mb-col">
+                            <label class="display-block">Use Custom HTML: </label>
+                            <label class="switch">
+                              <input 
+                                  type="checkbox" 
+                                  [checked]="homePageData.useCustomHtml"
+                                  #useCustomHtmlCheckbox
+                                  (change)="homePageData.useCustomHtml = useCustomHtmlCheckbox.checked">
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+
+                      </div>
+                      
+
+                      
+
+                    </mat-tab>
+                </mat-tab-group>
+              </div>
+
+            </fieldset>
+          
+            <fieldset>
+              <legend>Home page Custom HTML:</legend>
+
+              <div id="event-langs-nav">
+                <mat-tab-group animationDuration="0ms">
+                    <mat-tab *ngFor="let lang of eventSettings.event_languages" label="{{lang}}">
+
+                      <label>CUSTOM HTML in <span class="curr-lang-label">{{lang}}</span>:
+                        <textarea 
+                            [value]="getHomePageCustomHTMLForCurrentLang(lang)"
+                            (input)="setHomePageCustomHTMLForCurrentLang(lang, $event.target.value)"
+                            required 
+                            cols="30" 
+                            rows="10">
+                        </textarea>
+                      </label>
+
+                    </mat-tab>
+                </mat-tab-group>
+              </div>
+
+            </fieldset>
+            
+          </div>
+
+        </mat-tab>
+
+    </mat-tab-group>
+
+</div>

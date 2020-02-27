@@ -1,0 +1,18 @@
+.dashboard-main-container {
+    height: calc(100vh - 150px);
+    text-align: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h1 {
+        font-size: 3rem;
+        font-weight: bold;
+    }
+    img {
+        width: 80%;
+    }
+}

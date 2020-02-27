@@ -1,0 +1,25 @@
+.events_list_emty_state {
+    width: 100%;
+    justify-content: center;
+    div {
+          text-align: center;
+    }
+}
+
+.events_list_loading {
+    padding: 100px;
+    text-align: center;
+    color: #1d2531;
+    span {
+        padding: 10px;
+        display: block;
+        font-weight: bold;
+    }
+    i {
+        font-size: 2rem;
+    }
+}
+
+.events_list_container {
+    padding: 10px;
+}

@@ -1,0 +1,165 @@
+<div *ngIf="stillLoadingContent" class="mb-container content-view-loading-outer">
+    <div class="content-view-loading-inner">
+        <!-- <small>Loading... </small> -->
+        <mat-spinner [diameter]="30"></mat-spinner>
+    </div>
+</div>
+
+<div *ngIf="!stillLoadingContent" class="mb-container content-view">
+    <div class="text-align-right">
+        <button (click)="saveEventFeatures()" class="button">Save Features</button>
+        <div *ngIf="isSavingEventFeeaturesData" class="save-features-container">
+            <small>Saving... </small>
+            <mat-spinner [diameter]="30"></mat-spinner>
+        </div>
+        <div *ngIf="saveFeaturesShowSuccessMsg">
+            <span class="alert_message_success">Event Features was successfully saved!</span>
+        </div>
+
+    </div>
+    <div class="mb-row">
+
+        <div class="mb-col">
+            <fieldset class="premium-features">
+                <legend>Premium Features</legend>
+
+                <div class="vertical-a-m" *ngFor="let premiumFeature of eventFeaturesData.premium; let premiumFeatureIndex = index">
+
+                    <div class="pading-right-10 width-80">
+                        <h6 class="display-block">{{premiumFeature.title}}</h6>
+                        <p>{{premiumFeature.title}}</p>
+                    </div>
+                    <div class="width-20">
+                        <label class="switch">
+                            <input 
+                                type="checkbox" 
+                                [checked]="premiumFeature.is_active"
+                                #publishCheckbox
+                                (change)="togglePremiumFeature(premiumFeatureIndex, publishCheckbox.checked)">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+
+            </fieldset>
+        </div>
+
+        <div class="mb-col">
+            <fieldset>
+                <legend>Available Features</legend>
+                <div id="available-features-list" cdkDropList [cdkDropListData]="availableFeatures" [cdkDropListConnectedTo]="selectedFeaturesList" #availableFeaturesList="cdkDropList" (cdkDropListDropped)="drop($event)">
+                    <div *ngFor="let feature of availableFeatures" class="feature-list-item" cdkDrag>
+                        <div class="feature-list-item-title"><i class="{{feature.icon}}"></i> {{feature.title}}</div>
+                        <div class="feature-list-item-options"></div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="mb-col">
+            <fieldset>
+                <legend>Selected Features</legend>
+                <div id="selected-features-list" cdkDropList [cdkDropListData]="eventFeaturesData.selected" [cdkDropListConnectedTo]="availableFeaturesList" #selectedFeaturesList="cdkDropList" (cdkDropListDropped)="drop($event)">
+                    <div *ngFor="let feature of eventFeaturesData.selected; let featureindex = index" class="feature-list-item" cdkDrag>
+                        <div class="feature-list-item-title"><i class="{{feature.icon}}"></i> {{feature.title}}</div>
+                        <div class="feature-list-item-options">
+                            <i (click)="toggleEditFeatureModal(featureindex)" class="fas fa-pencil-alt"></i>
+                            <i (click)="removeSelectedFeature(featureindex)" class="fas fa-times"></i>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+
+
+    <div *ngIf="showEditEventFeatureModal" id="edit_event_feature_modal" class="modal" [class.is-active]="showEditEventFeatureModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Edit Feature</p>
+                <button (click)="showEditEventFeatureModal = !showEditEventFeatureModal;" class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+
+                <div *ngIf="showLoadingEditEventFeatureModal" class="mb-container content-view-loading-outer">
+                    <div class="content-view-loading-inner">
+                        <mat-spinner [diameter]="30"></mat-spinner>
+                    </div>
+                </div>
+
+                <div class="form-container" *ngIf="!showLoadingEditEventFeatureModal">
+
+                    <div id="event-langs-nav">
+                        <mat-tab-group animationDuration="0ms">
+                            <mat-tab *ngFor="let lang of currentEventSettings.event_languages" label="{{lang}}">
+
+                                <label>Feature title in <span class="curr-lang-label">{{lang}}</span>:
+                                    <input 
+                                        [value]="getFeatureTitleForCurrentLang(lang)"
+                                        (input)="setFeatureTitleForCurrentLang(lang, $event.target.value)"
+                                        required 
+                                        type="text">
+                                </label>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+
+                    <div *ngIf="currentFeatureEditData.type !== 'menu_divider'" class="other-feature-options">
+                        <label>Feature icon class:
+                            <input 
+                                [value]="currentFeatureEditData.data.selected_icon"
+                                (input)="currentFeatureEditData.data.selected_icon = $event.target.value"
+                                required 
+                                type="text">
+                        </label>
+
+                        <label class="display-block">Require Login: </label>
+                        <label class="switch">
+                            <input 
+                                type="checkbox" 
+                                [checked]="currentFeatureEditData.data.is_require_login"
+                                #requireLogin
+                                (change)="currentFeatureEditData.data.is_require_login = requireLogin.checked">
+                            <span class="slider round"></span>
+                        </label>
+
+                        <label class="display-block">Hidden: </label>
+                        <label class="switch">
+                            <input 
+                                type="checkbox" 
+                                [checked]="currentFeatureEditData.data.is_hidden"
+                                #hiddenFeature
+                                (change)="currentFeatureEditData.data.is_hidden = hiddenFeature.checked">
+                            <span class="slider round"></span>
+                        </label>
+
+                        <label class="display-block">Show on home page: </label>
+                        <label class="switch">
+                            <input 
+                                type="checkbox" 
+                                [checked]="currentFeatureEditData.data.show_on_home"
+                                #hideFeatureFromHome
+                                (change)="currentFeatureEditData.data.show_on_home = hideFeatureFromHome.checked">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+
+
+                </div>
+
+            </section>
+            <footer class="modal-card-foot">
+                <div *ngIf="isSavingEventFeeatureData" class="save-feature-container">
+                    <small>Saving... </small>
+                    <mat-spinner [diameter]="30"></mat-spinner>
+                </div>
+                <button class="button is-success" (click)="saveEventFeature()">Save</button>
+                <button class="button" (click)="showEditEventFeatureModal = !showEditEventFeatureModal;">Cancel</button>
+            </footer>
+        </div>
+    </div>
+
+</div>

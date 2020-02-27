@@ -1,0 +1,15 @@
+.translation-list-item {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+    width: 100%;
+    color: #424951;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    .translation-col-box {
+        border: 1px solid #e6eeee;
+        padding: 10px;
+    }
+}

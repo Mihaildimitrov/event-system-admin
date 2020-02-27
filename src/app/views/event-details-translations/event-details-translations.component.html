@@ -1,0 +1,70 @@
+<div *ngIf="stillLoadingContent" class="mb-container content-view-loading-outer">
+    <div class="content-view-loading-inner">
+        <mat-spinner [diameter]="30"></mat-spinner>
+    </div>
+</div>
+
+<div *ngIf="!stillLoadingContent" class="event-translations-main-container">
+    <div class="mb-row">
+        <div class="mb-col">
+            <div class="search-container padding-10 text-align-left">
+                <input [value]="searchWord" (input)="searchWord = $event.target.value" type="text" >
+            </div>
+        </div>
+        <div class="mb-col">
+            <div class="event-translations-nav">
+                <div class="padding-10 text-align-right">
+                    <button (click)="saveEventTranslations()" class="button">Save Translations</button>
+                    <div *ngIf="isSavingEventTranslations" class="save-translations-container">
+                        <small>Saving... </small>
+                        <mat-spinner [diameter]="30"></mat-spinner>
+                    </div>
+                    <div *ngIf="saveTranslationsShowSuccessMsg">
+                        <span class="alert_message_success">Event Translations were successfully saved!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="translations-list">
+        <div class="event-langs-nav">
+            <mat-tab-group animationDuration="150ms" (selectedTabChange)="languageTabChanged($event)">
+                <mat-tab *ngFor="let lang of eventSettings.event_languages; let i = index" label="{{lang}}" data-lang-val="{{lang}}">
+                    <div style="min-height: calc(100vh - 100px) !important;" *ngIf="stillLoadingTranslationsList" class="mb-container content-view-loading-outer">
+                        <div class="content-view-loading-inner">
+                            <mat-spinner [diameter]="30"></mat-spinner>
+                        </div>
+                    </div>
+
+                    <div style="min-height: calc(100vh - 100px) !important;" *ngIf="!stillLoadingTranslationsList">
+                        <div class="translations-nav-container">
+                            <div *ngIf="unsavedTranslationsShowWarningMsg[lang]" class="number-of-unsaved-translations">
+                                <span class="alert_message_warning">There are unsaved translations in <span>{{lang}}</span></span>
+                            </div>
+                        </div>
+                        <div class="mb-row translation-list-item">
+                            <div class="mb-col-sm-3 translation-col-box tra-key">KEY</div>
+                            <div class="mb-col-sm-3 translation-col-box tra-default">DEFAULT</div>
+                            <div class="mb-col-sm-6 translation-col-box">VALUE</div>
+                        </div>
+
+                        <div class="translation-list-container" *ngFor="let translation of eventTranslations[lang] | filterByString:searchWord">
+                            <div class="mb-row translation-list-item">
+                                <div class="mb-col-sm-3 translation-col-box tra-key">{{translation.key}}</div>
+                                <div class="mb-col-sm-3 translation-col-box tra-default">{{translation.default_tra}}</div>
+                                <div class="mb-col-sm-6 translation-col-box">
+                                    <input [value]="translation.value" 
+                                    (input)="translation.value = $event.target.value" 
+                                    type="text" 
+                                    (change)="translationDetectChange(translation.key, $event.target.value)" 
+                                    [ngClass]="{'translation-input-dirty': inputsStatus[lang][translation.key]}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

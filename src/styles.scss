@@ -1,0 +1,619 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    min-height: 100vh;
+}
+
+.button {
+    background-color: #1d2531;
+    border: 1px solid #1d2531;
+    color: white;
+    // text-align: center;
+    // text-decoration: none;
+    // display: inline-block;
+    // cursor: pointer;
+}
+
+.button:not(:last-child) {
+    border-right: none;
+}
+
+.button:hover {
+    background-color: #25303f;
+    color: white;
+}
+
+.button:focus {
+    border-color: #25303f;
+    color: white;
+}
+
+.hide {
+    display: none;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.md_sd_button {
+    background-color: #1d2531;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.alert_message_success {
+    padding: 2px 30px;
+    background-color: #91db9b;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    margin: 5px 0;
+    display: inline-block;
+}
+
+.alert_message_warning {
+    padding: 2px 30px;
+    background-color: #e9760a;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    margin: 5px 0;
+    display: inline-block;
+}
+
+.modal {
+    .modal-card-head {
+        border-bottom: 1px solid #1d2531;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        background-color: #1d2531;
+        color: #fff;
+        .modal-card-title {
+            color: #fff;
+        }
+        .delete {
+            width: 30px;
+            height: 30px;
+            max-width: 30px;
+            min-height: 30px;
+        }
+    }
+    .modal-card-foot {
+        align-items: center;
+        background-color: #fff;
+        display: flex;
+        flex-shrink: 0;
+        justify-content: flex-end;
+        padding: 20px;
+        position: relative;
+    }
+    button.is-success {
+        background-color: #1d2531;
+        border-color: transparent;
+        color: #fff;
+        &:hover {
+            background-color: #25303f;
+        }
+    }
+    button.is-danger {
+        background-color: #dd1414;
+        border-color: transparent;
+        color: #fff;
+        &:hover {
+            background-color: #dd3e3e;
+        }
+    }
+}
+
+form {
+    .alert {
+        position: relative;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+    }
+    .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
+}
+
+.padding-10 {
+    padding: 10px;
+}
+
+.pading-top-10 {
+    padding-top: 10px;
+}
+
+.display-block {
+    display: block;
+}
+
+.padding-bottom-20 {
+    padding-bottom: 20px;
+}
+
+.pading-right-10 {
+    padding-right: 10px;
+}
+
+.width-80 {
+    width: 80%;
+} 
+
+.width-20 {
+    width: 20%;
+} 
+
+.content-view-loading-outer {
+    height: 100%;
+    padding: 0;
+    /* margin: 0; */
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .content-view-loading-inner {
+
+    }
+}
+
+
+// TOGGLE
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #1d2531;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #1d2531;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #1d2531;
+}
+
+input,
+textarea,
+select {
+    &:focus {
+        outline-color: #1d2531;
+    }
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+
+/* Rounded sliders */
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.vertical-a-m {
+    display: flex;
+    align-items: center;
+}
+
+// --------------------------------------
+// RADIO button
+.container-radio {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/* Hide the browser's default radio button */
+
+.container-radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+/* Create a custom radio button */
+
+.radio-checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+
+/* On mouse-over, add a grey background color */
+
+.container-radio:hover input~.radio-checkmark {
+    background-color: #ccc;
+}
+
+
+/* When the radio button is checked, add a blue background */
+
+.container-radio input:checked~.radio-checkmark {
+    background-color: #1d2531;
+}
+
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+
+.radio-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+/* Show the indicator (dot/circle) when checked */
+
+.container-radio input:checked~.radio-checkmark:after {
+    display: block;
+}
+
+
+/* Style the indicator (dot/circle) */
+
+.container-radio .radio-checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+// --------------------------------------
+// CHECKBOX BTN
+
+/* The container */
+
+.container-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/* Hide the browser's default checkbox */
+
+.container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+
+/* Create a custom checkbox */
+
+.checkbox-checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+
+/* On mouse-over, add a grey background color */
+
+.container-checkbox:hover input~.checkbox-checkmark {
+    background-color: #ccc;
+}
+
+
+/* When the checkbox is checked, add a blue background */
+
+.container-checkbox input:checked~.checkbox-checkmark {
+    background-color: #1d2531;
+}
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkbox-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+/* Show the checkmark when checked */
+
+.container-checkbox input:checked~.checkbox-checkmark:after {
+    display: block;
+}
+
+
+/* Style the checkmark/indicator */
+
+.container-checkbox .checkbox-checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+/*
+    ****************************************************************************************************
+    SUCCEVO MEETINGBOX GRID SYSTEM
+*/
+
+.mb-container {
+    max-width: 100%;
+}
+
+.md-col,
+.mb-col-xs-1,
+.mb-col-xs-2,
+.mb-col-xs-3,
+.mb-col-xs-4,
+.mb-col-xs-5,
+.mb-col-xs-6,
+.mb-col-xs-7,
+.mb-col-xs-8,
+.mb-col-xs-9,
+.mb-col-xs-10,
+.mb-col-xs-11,
+.mb-col-xs-12 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    /* padding-right: 15px;
+    padding-left: 15px; */
+}
+
+.mb-row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* margin-right: -15px;
+    margin-left: -15px; */
+    width: 100%;
+    max-width: 100%;
+}
+
+.mb-col {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+@media (min-width: 480px) {
+    .mb-col-sm-12 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .mb-col-sm-11 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 91.666667%;
+        flex: 0 0 91.666667%;
+        max-width: 91.666667%;
+    }
+    .mb-col-sm-10 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 83.333333%;
+        flex: 0 0 83.333333%;
+        max-width: 83.333333%;
+    }
+    .mb-col-sm-9 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 75%;
+        flex: 0 0 75%;
+        max-width: 75%;
+    }
+    .mb-col-sm-8 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 66.666667%;
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
+    .mb-col-sm-7 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 58.333333%;
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%;
+    }
+    .mb-col-sm-6 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .mb-col-sm-4 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+    .mb-col-sm-3 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+    .mb-col-sm-2 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 16.666667%;
+        flex: 0 0 16.666667%;
+        max-width: 16.666667%;
+    }
+    .mb-col-sm-1 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 8.333333%;
+        flex: 0 0 8.333333%;
+        max-width: 8.333333%;
+    }
+}
+
+@media (max-width: 480px) {
+    .mb-col-xs-12 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .mb-col-xs-11 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 91.666667%;
+        flex: 0 0 91.666667%;
+        max-width: 91.666667%;
+    }
+    .mb-col-xs-10 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 83.333333%;
+        flex: 0 0 83.333333%;
+        max-width: 83.333333%;
+    }
+    .mb-col-xs-9 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 75%;
+        flex: 0 0 75%;
+        max-width: 75%;
+    }
+    .mb-col-xs-8 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 66.666667%;
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
+    .mb-col-xs-7 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 58.333333%;
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%;
+    }
+    .mb-col-xs-6 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .mb-col-xs-4 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+    .mb-col-xs-3 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+    .mb-col-xs-2 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 16.666667%;
+        flex: 0 0 16.666667%;
+        max-width: 16.666667%;
+    }
+    .mb-col-xs-1 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 8.333333%;
+        flex: 0 0 8.333333%;
+        max-width: 8.333333%;
+    }
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

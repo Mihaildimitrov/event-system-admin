@@ -1,0 +1,114 @@
+<ul *ngIf="!isStillLoading">
+
+    <li routerLinkActive="active" [routerLink]="['dashboard']">
+        <span><i class="fas fa-home"></i></span>
+        <a>Dashboard</a>
+    </li>
+    <li routerLinkActive="active" [routerLink]="['settings']">
+        <span><i class="fas fa-cogs"></i></span>
+        <a>Settings</a>
+    </li>
+    <li *ngIf="eventType === 'Single'" routerLinkActive="active" [routerLink]="['features']">
+        <span><i class="fas fa-list-ul"></i></span>
+        <a>Features</a>
+    </li>
+
+    <li *ngIf="eventType === 'Multi'" routerLinkActive="active" [routerLink]="['attachedapps']">
+        <span><i class="fas fa-list-ul"></i></span>
+        <a>Attached Apps</a>
+    </li>
+
+    <li *ngIf="eventType === 'Single'" class="menu_item_dropdown">
+        <span><i class="fas fa-database"></i></span>
+        <a>Content</a>
+    </li>
+
+    <ul class="features_list">
+
+        <li routerLinkActive="active" [routerLink]="['schedule']">
+            <span><i class="fal fa-calendar-alt"></i></span>
+            <a>Schedule</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['attendees']">
+            <span><i class="fal fa-users"></i></span>
+            <a>Atendees</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['speakers']">
+            <span><i class="fal fa-volume-up"></i></span>
+            <a>Speakers</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['exhibitors']">
+            <span><i class="fal fa-address-card"></i></span>
+            <a>Exhibitors</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['sponsors']">
+            <span><i class="fal fa-handshake"></i></span>
+            <a>Sponsors</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['maps']">
+            <span><i class="fal fa-map-marker"></i></span>
+            <a>Maps</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['pages']">
+            <span><i class="fal fa-file-alt"></i></span>
+            <a>Pages</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['forms']">
+            <span><i class="fal fa-edit"></i></span>
+            <a>Forms</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['livepoll']">
+            <span><i class="fal fa-chart-bar"></i></span>
+            <a>Livepoll</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['floorplan']">
+            <span><i class="fal fa-object-group"></i></span>
+            <a>Floor Plan</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['weather']">
+            <span><i class="fas fa-thermometer-half"></i></span>
+            <a>Weather</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['externallink']">
+            <span><i class="fal fa-link"></i></span>
+            <a>External Links</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['activityfeed']">
+            <span><i class="fal fa-wifi"></i></span>
+            <a>Activity Feed</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['publicchat']">
+            <span><i class="fal fa-comment-alt-lines"></i></span>
+            <a>Public Chat</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['privatechat']">
+            <span><i class="fal fa-comments"></i></span>
+            <a>Private Chat</a>
+        </li>
+        <li routerLinkActive="active" [routerLink]="['blogs']">
+            <span><i class="fal fa-blog"></i></span>
+            <a>Blogs</a>
+        </li>
+    </ul>
+
+    <li *ngIf="eventType === 'Single'" routerLinkActive="active" [routerLink]="['users']">
+        <span><i class="far fa-users"></i></span>
+        <a>Users</a>
+    </li>
+
+    <li routerLinkActive="active" [routerLink]="['design']">
+        <span><i class="fas fa-paint-brush"></i></span>
+        <a>Desgin</a>
+    </li>
+
+    <li routerLinkActive="active" [routerLink]="['translations']">
+        <span><i class="far fa-globe"></i></span>
+        <a>Translation</a>
+    </li>
+
+    <li routerLinkActive="active" [routerLink]="['notifications']">
+        <span><i class="fal fa-bell"></i></span>
+        <a>Notifications</a>
+    </li>
+
+</ul>

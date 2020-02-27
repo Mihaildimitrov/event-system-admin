@@ -1,0 +1,64 @@
+<div *ngIf="!isEventSetingsDownloaded" style="text-align: center;">
+    <!-- <i class="fal fa-spinner fa-spin loading-icon"></i> -->
+
+    <div class="mb-row event_list_item_container">
+        <div class="mb-col-sm-7 list_item_single_box"><i class="fal fa-spinner fa-spin loading-icon"></i></div>
+        <div class="mb-col list_item_single_box text-align-center"><i class="fal fa-spinner fa-spin loading-icon"></i></div>
+        <div class="mb-col list_item_single_box text-align-center eventcode_box">
+          <i class="fal fa-spinner fa-spin loading-icon"></i>
+        </div>
+        <div class="mb-col list_item_single_box text-align-center">
+          <span>
+            <i class="fal fa-spinner fa-spin loading-icon"></i>
+          </span>
+        </div>
+        <div class="mb-col list_item_single_box text-align-center">
+          <div class="mb-row" style="text-align: center;">
+            <div class="md-col">
+                <i class="fal fa-spinner fa-spin loading-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+<div *ngIf="isEventSetingsDownloaded">
+  <div class="mb-row event_list_item_container">
+    <div class="mb-col-sm-7 list_item_single_box">{{eventSettings.title}}</div>
+    <div class="mb-col list_item_single_box text-align-center">{{eventSettings.event_type}}</div>
+    <div class="mb-col list_item_single_box text-align-center eventcode_box">{{eventSettings.event_code}}</div>
+    <div class="mb-col list_item_single_box text-align-center" *ngIf="eventSettings.is_published"><span
+        class="event_type_status_published">PUBLISHED</span></div>
+    <div class="mb-col list_item_single_box text-align-center" *ngIf="!eventSettings.is_published"><span
+        class="event_type_status_draft">DRAFT</span></div>
+    <div class="mb-col list_item_single_box text-align-center">
+      <div class="mb-row">
+        <span routerLink="/event/{{eventSettings.event_code}}" class="mb-col">
+          <i class="fal fa-pen"></i>
+        </span>
+        <span (click)="toggleModalRemoveEvent()" class="mb-col">
+          <i class="fal fa-trash"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isEventSetingsDownloaded" id="delete_event_modal" class="modal" [class.is-active]="showDeleteEventModal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Delete Event</p>
+        <button (click)="toggleModalRemoveEvent()" class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+  
+        <h3>Delete event <b>{{eventSettings.title}}</b>. Are you sure?</h3>
+  
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-danger" (click)="doRemoveEvent()">Delete</button>
+        <button class="button" (click)="toggleModalRemoveEvent()">Cancel</button>
+      </footer>
+    </div>
+  </div>
+</div>

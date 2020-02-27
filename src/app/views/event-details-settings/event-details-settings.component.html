@@ -1,0 +1,217 @@
+<div *ngIf="stillLoadingContent" class="mb-container content-view-loading-outer">
+    <div class="content-view-loading-inner">
+        <!-- <small>Loading... </small> -->
+        <mat-spinner [diameter]="30"></mat-spinner>
+    </div>
+</div>
+
+<div *ngIf="!stillLoadingContent" class="event-settings-main-container">
+
+    <div class="event-settings-nav text-align-right">
+        <button (click)="saveEventSettings()" class="button">Save Settings</button>
+        <div *ngIf="isSavingEventSettingsData" class="save-settings-container">
+            <small>Saving... </small>
+            <mat-spinner [diameter]="30"></mat-spinner>
+        </div>
+        <div *ngIf="saveSettingsShowSuccessMsg">
+            <span class="alert_message_success">Event Settings was successfully saved!</span>
+        </div>
+    </div>
+
+    <div class="form-container">
+
+        <fieldset>
+            <legend>Event information:</legend>
+
+            <div id="event-langs-nav">
+                <mat-tab-group animationDuration="0ms">
+                    <mat-tab *ngFor="let lang of eventSettings.event_languages" label="{{lang}}">
+
+                        <label>Event title in <span class="curr-lang-label">{{lang}}</span>:
+                            <input 
+                                [value]="getEventTitleForCurrentLang(lang)"
+                                (input)="setEventTitleForCurrentLang(lang, $event.target.value)"
+                                required 
+                                type="text">
+                            <p class="event-settings-err-msg" *ngIf="!eventSettingsFieldsStatus.is_valid_title">
+                                Event Title is required!
+                            </p>
+                        </label>
+                        <label>Event description in <span class="curr-lang-label">{{lang}}</span>:
+                            <textarea 
+                                [value]="getEventDescriptionForCurrentLang(lang)"
+                                (input)="setEventDescriptionForCurrentLang(lang, $event.target.value)"
+                                required 
+                                cols="30" 
+                                rows="5">
+                            </textarea>
+                            <p class="event-settings-err-msg" *ngIf="!eventSettingsFieldsStatus.is_valid_description">
+                                Event Description is required!
+                            </p>
+                        </label>
+
+
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+
+            <div class="mb-row">
+                <div class="mb-col padding-10">
+                    <label>Event code:</label>
+                    <input disabled [value]="eventSettings.event_code" (input)="eventSettings.event_code = $event.target.value" minlength="6" maxlength="6" required type="text">
+                    <p class="event-settings-err-msg" *ngIf="!eventSettingsFieldsStatus.is_valid_event_code">
+                        Event Code is required and must be 6 charachters!
+                    </p>
+                </div>
+                <div *ngIf="eventSettings.event_type === 'Single'" class="mb-col padding-10">
+                    <label>Start Date:
+                        <input required [value]="eventSettings.start_date" (input)="eventSettings.start_date = $event.target.value" type="date">
+                        <p class="event-settings-err-msg" *ngIf="!eventSettingsFieldsStatus.is_valid_start_date">
+                            Event Start Date must be before Event End Date!
+                        </p>
+                    </label>
+                </div>
+                <div *ngIf="eventSettings.event_type === 'Single'" class="mb-col padding-10">
+                    <label>End Date:
+                        <input type="date" [value]="eventSettings.end_date" (input)="eventSettings.end_date = $event.target.value" required>
+                        <p class="event-settings-err-msg" *ngIf="!eventSettingsFieldsStatus.is_valid_end_date">
+                            Event End Date must be after Event Start Date!
+                        </p>
+                    </label>
+                </div>
+            </div>
+
+            <div class="mb-row">
+                <div class="mb-col padding-10">
+                    <label class="display-block">Event Type: </label>
+                    <label class="container-radio">Singe Event
+                        <input 
+                            type="radio" 
+                            [checked]="eventSettings.event_type==='Single'" 
+                            name="eventType" 
+                            (change)="eventSettings.event_type = 'Single'">
+                        <span class="radio-checkmark"></span>
+                    </label>
+                    <label class="container-radio">Multi Event
+                        <input 
+                            type="radio" 
+                            [checked]="eventSettings.event_type==='Multi'" 
+                            name="eventType"
+                            (change)="eventSettings.event_type = 'Multi'">
+                        <span class="radio-checkmark"></span>
+                    </label>
+                    <p class="event-settings-err-msg" *ngIf="!eventSettingsFieldsStatus.is_valid_event_type">
+                        Event Type is required!
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-row">
+                <div class="mb-col padding-10">
+                    <label class="display-block">Published Event: </label>
+                    <label class="switch">
+                        <input 
+                            type="checkbox" 
+                            [checked]="eventSettings.is_published"
+                            #publishCheckbox
+                            (change)="eventSettings.is_published = publishCheckbox.checked">
+                        <span class="slider round"></span>
+                    </label>
+                    <p class="event-settings-err-msg" *ngIf="!eventSettingsFieldsStatus.is_valid_is_published">
+                        Event Publish Status is required!
+                    </p>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Event Languages:</legend>
+            <div class="mb-row">
+                <div class="mb-col padding-10">
+                    <label>Event Default Language:</label>
+                    <select (change)="eventSettings.event_default_lang = $event.target.value">
+                        <option *ngFor="let lang of eventSettings.event_languages" value="{{lang}}" [attr.selected]="checkForDefaultEventLang(lang)">{{lang}}</option>
+                    </select>
+                    <p class="event-settings-err-msg" *ngIf="!eventSettingsFieldsStatus.is_valid_event_default_lang">
+                        Event Default Language is required!
+                    </p>
+                </div>
+
+                <div class="mb-col padding-10">
+                    <label>Event Languages:</label>
+                    <label *ngFor="let lang of eventValidLanguages" class="container-checkbox">{{lang}}
+                        <input type="checkbox" value="{{lang}}" [checked]="checkIfLanguageIsSelectedForEvent(lang)" (change)="chnageEventlanguagesValue($event)">
+                        <span class="checkbox-checkmark"></span>
+                    </label>
+                    <p class="event-settings-err-msg" *ngIf="!eventSettingsFieldsStatus.is_valid_event_languages">
+                        Event Languages is required, you must select at least one language!
+                    </p>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Event settings:</legend>
+            <div class="mb-row">
+                <div class="mb-col padding-10">
+                    <label>Event Custom JS:
+                        <textarea 
+                            [value]="eventSettings.custom_js" 
+                            (input)="eventSettings.custom_js = $event.target.value"
+                            [value]="eventSettings.custom_js" 
+                            cols="30" 
+                            rows="10">
+                        </textarea>
+                    </label>
+                </div>
+                <div class="mb-col padding-10">
+                    <label>Event Custom CSS:
+                        <textarea 
+                            [value]="eventSettings.custom_css" 
+                            (input)="eventSettings.custom_css = $event.target.value"
+                            cols="30" 
+                            rows="10">
+                        </textarea>
+                    </label>
+                </div>
+            </div>
+
+            <div *ngIf="eventSettings.event_type === 'Single'" class="mb-row">
+                <div class="mb-col padding-10">
+                    <label class="display-block">Event SignIn Option:</label>
+                    <label class="switch">
+                        <input 
+                            type="checkbox" 
+                            [checked]="eventSettings.signIn"
+                            #signInCheckbox
+                            (change)="eventSettings.signIn = signInCheckbox.checked">
+                        <span class="slider round"></span>
+                    </label>
+                    <p class="event-settings-err-msg" *ngIf="!eventSettingsFieldsStatus.is_valid_signIn">
+                        Event signIn is required!
+                    </p>
+                </div>
+            </div>
+
+            <div *ngIf="eventSettings.event_type === 'Single'" class="mb-row">
+                <div class="mb-col padding-10">
+                    <label class="display-block">Event SignUp Option: </label>
+                    <label class="switch">
+                        <input 
+                            type="checkbox" 
+                            [checked]="eventSettings.signUp"
+                            #signUpCheckbox
+                            (change)="eventSettings.signUp = signUpCheckbox.checked">
+                        <span class="slider round"></span>
+                    </label>
+                    <p class="event-settings-err-msg" *ngIf="!eventSettingsFieldsStatus.is_valid_signUp">
+                        Event signUp is required!
+                    </p>
+                </div>
+            </div>
+
+        </fieldset>
+
+    </div>
+
+</div>

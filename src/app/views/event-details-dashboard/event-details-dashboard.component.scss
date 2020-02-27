@@ -1,0 +1,13 @@
+div {
+    text-align: center;
+    top: 50%;
+    height: calc(100vh - 150px);
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    small {
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+}

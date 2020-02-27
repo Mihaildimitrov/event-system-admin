@@ -1,0 +1,14 @@
+.event_details_main_container {
+    display: -webkit-box;
+    display: flex;
+    .event_details_side_menu {
+        width: 200px;
+        background: #1d2531;
+        color: #a1abb1;
+        min-height: calc(100vh - 105px);
+    }
+    .event_details_main_section {
+        width: calc(100% - 200px);
+        min-height: 100%;
+    }
+}
