@@ -1,4 +1,3 @@
-import { ListPage } from './../../../../../eventApp/src/app/list/list.page';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data/data.service';
