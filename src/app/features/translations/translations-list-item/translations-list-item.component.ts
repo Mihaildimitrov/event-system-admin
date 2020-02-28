@@ -7,8 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TranslationsListItemComponent implements OnInit {
 
-  @Input() translation: Object;
-
   constructor() { }
 
   ngOnInit() {

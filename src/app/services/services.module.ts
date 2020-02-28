@@ -9,12 +9,7 @@ import { AuthGuardService } from './authentication/auth-guard.service';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
-    FirebaseService,
-    DataService,
-    TranslationsService,
-    AuthService,
-    AuthGuardService
+    CommonModule
   ],
   providers: [
     FirebaseService,

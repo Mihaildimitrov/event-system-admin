@@ -1,94 +1,94 @@
 <div class="event_list_navigation_container">
 
-  <div class="events_list_actions_container">
-    <button class="md_sd_button" (click)="toggleModal()">Create New Event</button>
-    <div *ngIf="eventCreatedSuccessfullyAlertVisibility">
-      <span class="alert_message_success">Event was ceated successfully!</span>
+    <div class="events_list_actions_container">
+        <button class="md_sd_button" (click)="toggleModal()">Create New Event</button>
+        <div *ngIf="eventCreatedSuccessfullyAlertVisibility">
+            <span class="alert_message_success">Event was ceated successfully!</span>
+        </div>
     </div>
-  </div>
 
 </div>
 
 
 <div id="add_new_event_modal" class="modal" [class.is-active]="showCreateEventModal">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">Create New Event</p>
-      <button (click)="toggleModal()" class="delete" aria-label="close"></button>
-    </header>
-    <section class="modal-card-body">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Create New Event</p>
+            <button (click)="toggleModal()" class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
 
-      <form [formGroup]="newEventForm">
-        <label>Event title:
+            <form [formGroup]="newEventForm">
+                <label>Event title:
           <input class="form-control" required type="text" formControlName="eventTitle">
         </label>
-        <div *ngIf="getFormFieldRef.eventTitle.invalid && (getFormFieldRef.eventTitle.dirty || getFormFieldRef.eventTitle.touched || formIsDirty)" class="alert alert-danger">
-          <div *ngIf="getFormFieldRef.eventTitle.errors.required">
-            Event title is required.
-          </div>
-        </div>
+                <div *ngIf="getFormFieldRef.eventTitle.invalid && (getFormFieldRef.eventTitle.dirty || getFormFieldRef.eventTitle.touched || formIsDirty)" class="alert alert-danger">
+                    <div *ngIf="getFormFieldRef.eventTitle.errors.required">
+                        Event title is required.
+                    </div>
+                </div>
 
-        <label>Event description:
+                <label>Event description:
           <textarea class="form-control" required formControlName="eventDescription" cols="30" rows="10"></textarea>
         </label>
 
-        <div *ngIf="getFormFieldRef.eventDescription.invalid && (getFormFieldRef.eventDescription.dirty || getFormFieldRef.eventDescription.touched || formIsDirty)" class="alert alert-danger">
-          <div *ngIf="getFormFieldRef.eventDescription.errors.required">
-            Event description is required.
-          </div>
-        </div>
+                <div *ngIf="getFormFieldRef.eventDescription.invalid && (getFormFieldRef.eventDescription.dirty || getFormFieldRef.eventDescription.touched || formIsDirty)" class="alert alert-danger">
+                    <div *ngIf="getFormFieldRef.eventDescription.errors.required">
+                        Event description is required.
+                    </div>
+                </div>
 
-        <label>Event Type:</label>
-        <select required formControlName="eventType" class="form-control" id="exampleFormControlSelect1">
+                <label>Event Type:</label>
+                <select required formControlName="eventType" class="form-control" id="exampleFormControlSelect1">
           <option value="Single">Single</option>
           <option value="Multi">Multi</option>
         </select>
-        <div *ngIf="getFormFieldRef.eventType.invalid && (getFormFieldRef.eventType.dirty || getFormFieldRef.eventType.touched || formIsDirty)" class="alert alert-danger">
-          <div *ngIf="getFormFieldRef.eventType.errors.required">
-            Event type is required.
-          </div>
-        </div>
+                <div *ngIf="getFormFieldRef.eventType.invalid && (getFormFieldRef.eventType.dirty || getFormFieldRef.eventType.touched || formIsDirty)" class="alert alert-danger">
+                    <div *ngIf="getFormFieldRef.eventType.errors.required">
+                        Event type is required.
+                    </div>
+                </div>
 
-        <label>Event code:
+                <label>Event code:
           <input #inputEventCode (input)="inputEventCode.value=$event.target.value.toUpperCase()" minlength="6" maxlength="6" class="form-control" required type="text" formControlName="eventCode">
         </label>
-        <div *ngIf="(getFormFieldRef.eventCode.invalid && (getFormFieldRef.eventCode.dirty || getFormFieldRef.eventCode.touched || formIsDirty) || eventCodeAlreadyExist)" class="alert alert-danger">
-          <div *ngIf="getFormFieldRef.eventCode.errors?.required">
-            Event code is required.
-          </div>
-          <div *ngIf="getFormFieldRef.eventCode.errors?.minlength || getFormFieldRef.eventCode.errors?.maxlength">
-            Event code must be 6 characters long.
-          </div>
-          <div *ngIf="eventCodeAlreadyExist">
-            Event code has already exist. Please enter another event code.
-          </div>
-        </div>
+                <div *ngIf="(getFormFieldRef.eventCode.invalid && (getFormFieldRef.eventCode.dirty || getFormFieldRef.eventCode.touched || formIsDirty) || eventCodeAlreadyExist)" class="alert alert-danger">
+                    <div *ngIf="getFormFieldRef.eventCode.errors?.required">
+                        Event code is required.
+                    </div>
+                    <div *ngIf="getFormFieldRef.eventCode.errors?.minlength || getFormFieldRef.eventCode.errors?.maxlength">
+                        Event code must be 6 characters long.
+                    </div>
+                    <div *ngIf="eventCodeAlreadyExist">
+                        Event code has already exist. Please enter another event code.
+                    </div>
+                </div>
 
-        <label>Start Date:
+                <label>Start Date:
           <input required formControlName="eventStartDate" class="form-control" type="date" #eventStartDateField>
         </label>
-        <div *ngIf="getFormFieldRef.eventStartDate.invalid && (getFormFieldRef.eventStartDate.dirty || getFormFieldRef.eventStartDate.touched || formIsDirty)" class="alert alert-danger">
-          <div *ngIf="getFormFieldRef.eventStartDate.errors.required">
-            Event start date is required.
-          </div>
-        </div>
+                <div *ngIf="getFormFieldRef.eventStartDate.invalid && (getFormFieldRef.eventStartDate.dirty || getFormFieldRef.eventStartDate.touched || formIsDirty)" class="alert alert-danger">
+                    <div *ngIf="getFormFieldRef.eventStartDate.errors.required">
+                        Event start date is required.
+                    </div>
+                </div>
 
-        <label>End Date:
+                <label>End Date:
           <input type="date" required formControlName="eventEndDate" class="form-control" #eventEndDateField>
         </label>
-        <div *ngIf="getFormFieldRef.eventEndDate.invalid && (getFormFieldRef.eventEndDate.dirty || getFormFieldRef.eventEndDate.touched || formIsDirty)" class="alert alert-danger">
-          <div *ngIf="getFormFieldRef.eventEndDate.errors.required">
-            Event end date is required.
-          </div>
-        </div>
+                <div *ngIf="getFormFieldRef.eventEndDate.invalid && (getFormFieldRef.eventEndDate.dirty || getFormFieldRef.eventEndDate.touched || formIsDirty)" class="alert alert-danger">
+                    <div *ngIf="getFormFieldRef.eventEndDate.errors.required">
+                        Event end date is required.
+                    </div>
+                </div>
 
-      </form>
+            </form>
 
-    </section>
-    <footer class="modal-card-foot">
-      <button class="button is-success" (click)="onCreateEvent(fluidRight)">Save</button>
-      <button class="button" (click)="toggleModal()">Cancel</button>
-    </footer>
-  </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-success" (click)="onCreateEvent()">Save</button>
+            <button class="button" (click)="toggleModal()">Cancel</button>
+        </footer>
+    </div>
 </div>

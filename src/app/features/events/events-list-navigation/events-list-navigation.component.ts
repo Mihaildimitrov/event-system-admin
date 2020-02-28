@@ -35,7 +35,7 @@ export class EventsListNavigationComponent implements OnInit {
     this.showCreateEventModal = !this.showCreateEventModal;
   }
 
-  onCreateEvent(modalElemRef: any) {
+  onCreateEvent() {
     this.formIsDirty = true;
 
     if (this.newEventForm.invalid) {

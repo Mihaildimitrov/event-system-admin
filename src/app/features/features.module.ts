@@ -7,8 +7,8 @@ import { EventsListItemComponent } from './events/events-list-item/events-list-i
 import { EventsListNavigationComponent } from './events/events-list-navigation/events-list-navigation.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { UsersListItemComponent } from './users/users-list-item/users-list-item.component';
-// import { TranslationsListComponent } from './translations/translations-list/translations-list.component';
-// import { TranslationsListItemComponent } from './translations/translations-list-item/translations-list-item.component';
+import { TranslationsListComponent } from './translations/translations-list/translations-list.component';
+import { TranslationsListItemComponent } from './translations/translations-list-item/translations-list-item.component';
 
 
 @NgModule({
@@ -19,9 +19,9 @@ import { UsersListItemComponent } from './users/users-list-item/users-list-item.
     UsersListComponent,
     UsersListItemComponent,
     UsersListComponent,
-    UsersListItemComponent
-    // TranslationsListComponent,
-    // TranslationsListItemComponent
+    UsersListItemComponent,
+    TranslationsListComponent,
+    TranslationsListItemComponent
   ],
   imports: [
     CommonModule,
@@ -33,9 +33,9 @@ import { UsersListItemComponent } from './users/users-list-item/users-list-item.
     EventsListItemComponent,
     EventsListNavigationComponent,
     UsersListComponent,
-    UsersListItemComponent
-    // TranslationsListComponent,
-    // TranslationsListItemComponent
+    UsersListItemComponent,
+    TranslationsListComponent,
+    TranslationsListItemComponent
   ]
 })
 export class FeaturesModule { }

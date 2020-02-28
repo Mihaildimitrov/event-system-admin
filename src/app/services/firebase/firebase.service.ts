@@ -12,9 +12,6 @@ export class FirebaseService {
   FDB: any;
   FS: any;
   AUTH: any;
-
-
-
   private checkIfAllGivenFilesAreDeleted: any;
 
   constructor() {
