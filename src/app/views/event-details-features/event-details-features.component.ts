@@ -158,7 +158,8 @@ export class EventDetailsFeaturesComponent implements OnInit {
     selected_icon: '',
     is_hidden: false,
     is_require_login: false,
-    show_on_home: true
+    show_on_home: true,
+    title: ''
   };
   currentFeatureEditIndexInArray = null;
   availableFeatures = [
@@ -309,7 +310,8 @@ export class EventDetailsFeaturesComponent implements OnInit {
       selected_icon: '',
       is_hidden: false,
       is_require_login: false,
-      show_on_home: true
+      show_on_home: true,
+      title: ''
     };
     this.currentFeatureEditIndexInArray = featureindex;
     
