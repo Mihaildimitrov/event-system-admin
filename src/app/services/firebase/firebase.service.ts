@@ -1,30 +1,9 @@
-import { Injectable, ɵConsole } from "@angular/core";
+import { Injectable } from "@angular/core";
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
 import "firebase/auth";
 
-// const config = {
-//   apiKey: "AIzaSyCpF7yjQa8CL8TMYXe6QxXbIXaBj2yv-ec",
-//   authDomain: "event-system-2041f.firebaseapp.com",
-//   databaseURL: "https://event-system-2041f.firebaseio.com",
-//   projectId: "event-system-2041f",
-//   storageBucket: "event-system-2041f.appspot.com",
-//   messagingSenderId: "286459753933"
-// };
-
-const config = {
-  apiKey: "AIzaSyCQ0s5qszhJJl9A33jmbt2tmC8C57dFbCQ",
-  authDomain: "event-system-49b35.firebaseapp.com",
-  databaseURL: "https://event-system-49b35.firebaseio.com",
-  projectId: "event-system-49b35",
-  storageBucket: "event-system-49b35.appspot.com",
-  messagingSenderId: "399763809330",
-  appId: "1:399763809330:web:4a99a1bdc8ada64546482b",
-  measurementId: "G-DC0JMDFHX6"
-};
-
-firebase.initializeApp(config);
 
 @Injectable({
   providedIn: "root"
@@ -34,9 +13,24 @@ export class FirebaseService {
   FS: any;
   AUTH: any;
 
+
+
   private checkIfAllGivenFilesAreDeleted: any;
 
   constructor() {
+    const config = {
+      apiKey: "AIzaSyCQ0s5qszhJJl9A33jmbt2tmC8C57dFbCQ",
+      authDomain: "event-system-49b35.firebaseapp.com",
+      databaseURL: "https://event-system-49b35.firebaseio.com",
+      projectId: "event-system-49b35",
+      storageBucket: "event-system-49b35.appspot.com",
+      messagingSenderId: "399763809330",
+      appId: "1:399763809330:web:4a99a1bdc8ada64546482b",
+      measurementId: "G-DC0JMDFHX6"
+    };
+    
+    firebase.initializeApp(config);
+    
     this.FDB = firebase.firestore();
     this.FS = firebase.storage();
     this.AUTH = firebase.auth();

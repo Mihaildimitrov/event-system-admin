@@ -3,6 +3,8 @@ import { FirebaseService } from './firebase/firebase.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslationsService } from './translations/translations.service';
+import { AuthService } from './authentication/auth.service';
+import { AuthGuardService } from './authentication/auth-guard.service';
 
 @NgModule({
   declarations: [],
@@ -10,12 +12,16 @@ import { TranslationsService } from './translations/translations.service';
     CommonModule,
     FirebaseService,
     DataService,
-    TranslationsService
+    TranslationsService,
+    AuthService,
+    AuthGuardService
   ],
   providers: [
     FirebaseService,
     DataService,
-    TranslationsService
+    TranslationsService,
+    AuthService,
+    AuthGuardService
   ]
 })
 export class ServicesModule { }
