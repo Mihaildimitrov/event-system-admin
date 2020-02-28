@@ -15,10 +15,16 @@
     <div class="user-settings-box">
         <div class="user-name-box">
             <div class="greeting">Welcome, </div>
-            <div class="account-name">Mihail Dimitrov</div>
+            <div class="user-name">Mihail Dimitrov</div>
         </div>
         <img src="https://cjmart.jp/en/upload/save_image/0128_190824_mp4otl_y_3.jpg" alt="">
-
+        <div class="user-menu-box">
+            <ul class="user-menu-list">
+                <li class="menu-list-item" routerLinkActive="active" [routerLink]="['dashboard']">Dashboard</li>
+                <li class="menu-list-item" routerLinkActive="active" [routerLink]="['events']">Events</li>
+                <li class="menu-list-item" routerLinkActive="active" [routerLink]="['users']">Users</li>
+            </ul>
+        </div>
     </div>
 
 </div>

@@ -60,7 +60,7 @@
             padding-right: 10px;
             color: #fff;
             cursor: pointer;
-            .account-name {
+            .user-name {
                 font-size: 0.8rem;
                 font-weight: 500;
             }
@@ -76,5 +76,21 @@
             vertical-align: middle;
             cursor: pointer;
         }
+    }
+    .user-menu-box {
+        right: 0;
+        top: 60px;
+        left: auto;
+        position: absolute;
+        z-index: 1000;
+        min-width: 10rem;
+        padding: 10px;
+        font-size: 1rem;
+        color: #212529;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        transition: all;
     }
 }
