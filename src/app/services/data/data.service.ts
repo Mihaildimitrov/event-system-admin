@@ -17,6 +17,10 @@ export class DataService {
     return this.database.getAuthReference();
   }
 
+  getFirestoreEventConfigurationsReference(eventCode: string) {
+    return this.database.getFirestoreEventConfigurationsReference(eventCode);
+  }
+
   sendPasswordResetEmail(email: string) {
     return new Promise((resolve, reject) => {
       return this.database.sendPasswordResetEmail(email).then((result: any) => {

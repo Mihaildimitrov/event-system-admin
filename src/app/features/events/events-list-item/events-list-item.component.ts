@@ -10,16 +10,15 @@ import { DataService } from 'src/app/services/data/data.service';
 export class EventsListItemComponent implements OnInit {
 
   @Input() eventCode: string;
+  @Input() eventData: any;
   @Output() eventDeleted = new EventEmitter<string>();
 
   showDeleteEventModal: Boolean = false;
-  eventSettings;
-  isEventSetingsDownloaded: Boolean = false;
 
   constructor(private dataService: DataService) { }
 
   doRemoveEvent() {
-    this.eventDeleted.emit(this.eventSettings.event_code);
+    this.eventDeleted.emit(this.eventData.event_code);
   }
 
   toggleModalRemoveEvent() {
@@ -27,12 +26,7 @@ export class EventsListItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.getEventData(this.eventCode).then((result: any) => {
-      this.eventSettings = result;
-      this.isEventSetingsDownloaded = true;
-    }, (error: any) => {
-      console.log(error);
-    });
+    console.log('eventData => ', this.eventData);
   }
 
 }

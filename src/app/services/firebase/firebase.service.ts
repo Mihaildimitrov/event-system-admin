@@ -38,6 +38,10 @@ export class FirebaseService {
     return this.AUTH;
   }
 
+  getFirestoreEventConfigurationsReference(eventCode: string) {
+    return this.FDB.collection("events_data").doc(eventCode).collection("settings").doc("configurations");
+  }
+
   sendPasswordResetEmail(email: string) {
     return new Promise((resolve, reject) => {
       this.AUTH.sendPasswordResetEmail(email).then(function(success) {
@@ -142,27 +146,18 @@ export class FirebaseService {
               "Event code has already exist. Please enter another event code."
             );
           } else {
+            eventData["date_created"] = new Date(new Date().toUTCString()).getTime();
             // Get a new write batch
             let batch = this.FDB.batch();
 
-            let eventConfigurationsRef = this.FDB.collection("events_data")
-              .doc(eventData.event_code)
-              .collection("settings")
-              .doc("configurations");
+            let eventConfigurationsRef = this.FDB.collection("events_data").doc(eventData.event_code).collection("settings").doc("configurations");
             batch.set(eventConfigurationsRef, eventData);
 
-            let eventFieldsRef = this.FDB.collection("events_data").doc(
-              eventData.event_code
-            );
-            batch.set(eventFieldsRef, {
-              date_created: new Date(new Date().toUTCString()).getTime(),
-              event_code: eventData.event_code
-            });
+            let eventFieldsRef = this.FDB.collection("events_data").doc(eventData.event_code);
+            batch.set(eventFieldsRef, eventData);
 
             // Commit the batch
-            batch.commit().then(function() {
-              resolve(true);
-            });
+            batch.commit().then(function() { resolve(true); });
           }
         },
         (error: any) => {
@@ -175,12 +170,7 @@ export class FirebaseService {
   getAllEvents(startEvent = null, limit = 20) {
     return new Promise((resolve, reject) => {
       if (startEvent !== null) {
-        this.FDB.collection("events_data")
-          .startAfter(startEvent)
-          .orderBy("date_created", "desc")
-          .limit(limit)
-          .get()
-          .then(
+        this.FDB.collection("events_data").startAfter(startEvent).orderBy("date_created", "desc").limit(limit).get().then(
             function(events: any) {
               resolve(events.docs);
             },
@@ -221,38 +211,31 @@ export class FirebaseService {
 
   getEventData(eventCode: string) {
     return new Promise((resolve, reject) => {
-      this.FDB.collection("events_data")
-        .doc(eventCode)
-        .collection("settings")
-        .doc("configurations")
-        .get()
-        .then(function(doc: any) {
-          if (doc.exists) {
-            resolve(doc.data());
-          } else {
-            reject("No such document!");
-          }
-        })
-        .catch(function(error: any) {
-          reject(error);
-        });
+      this.FDB.collection("events_data").doc(eventCode).collection("settings").doc("configurations").get().then(function(doc: any) {
+        if (doc.exists) {
+          resolve(doc.data());
+        } else {
+          reject("No such document!");
+        }
+      }).catch(function(error: any) {
+        reject(error);
+      });
     });
   }
 
   saveEventDataSettings(eventData) {
     return new Promise((resolve, reject) => {
-      const eventDataRef = this.FDB.collection("events_data")
-        .doc(eventData.event_code)
-        .collection("settings")
-        .doc("configurations");
-      eventDataRef
-        .set(eventData, { merge: true })
-        .then(function() {
-          resolve(true);
-        })
-        .catch(function(error: any) {
-          reject(false);
-        });
+      // Get a new write batch
+      let batch = this.FDB.batch();
+
+      let eventConfigurationsRef = this.FDB.collection("events_data").doc(eventData.event_code).collection("settings").doc("configurations");
+      batch.update(eventConfigurationsRef, eventData);
+
+      let eventFieldsRef = this.FDB.collection("events_data").doc(eventData.event_code);
+      batch.update(eventFieldsRef, eventData);
+
+      // Commit the batch
+      batch.commit().then(function() { resolve(true); });
     });
   }
 

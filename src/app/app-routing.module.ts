@@ -35,12 +35,14 @@ import { EventDetailsPrivatechatComponent } from './views/event-details-privatec
 import { SignInComponent } from './views/sign-in/sign-in.component';
 import { SignUpComponent } from './views/sign-up/sign-up.component';
 import { AuthGuardService } from './services/authentication/auth-guard.service';
+import { MyProfileComponent } from './views/my-profile/my-profile.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   { path: 'signin', component: SignInComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'resetPassword', component: ResetPasswordComponent },
+  { path: 'myprofile', component: MyProfileComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'events', component: EventsComponent, canActivate: [AuthGuardService] },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuardService] },

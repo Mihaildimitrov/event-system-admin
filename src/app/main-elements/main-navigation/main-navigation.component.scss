@@ -78,8 +78,8 @@
         }
     }
     .user-menu-box {
+        display: none;
         right: 0;
-        top: 60px;
         left: auto;
         position: absolute;
         z-index: 1000;
@@ -91,6 +91,30 @@
         list-style: none;
         background-color: #fff;
         border: 1px solid rgba(0, 0, 0, 0.15);
-        transition: all;
+        margin-top: 2px;
+        background-color: #1d2531;
+        color: #a1abb1;
+        font-size: 0.9rem;
+        font-weight: 500;
+        ul {
+            li {
+                cursor: pointer;
+                &:hover {
+                    color: #fff;
+                }
+            }
+        }
+        span {
+            vertical-align: middle;
+        }
+        i {
+            width: 1.5rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
     }
+}
+
+.user-settings-box:hover .user-menu-box {
+    display: block;
 }

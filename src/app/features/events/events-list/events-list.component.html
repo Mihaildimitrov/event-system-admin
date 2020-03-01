@@ -3,10 +3,11 @@
     <i class="fal fa-spinner fa-spin loading-icon"></i>
 </div>
 
+
+
 <div *ngIf="!events.length && !isDownloadingEvents" class="events_list_emty_state">
     <app-events-list-navigation (newEventAdded)="refreshEventsList($event)"></app-events-list-navigation>
     <div>There are no events.</div>
-
 </div>
 
 <div *ngIf="events.length && !isDownloadingEvents" class="events_list_container">
@@ -21,6 +22,6 @@
         <div class="mb-col list_item_header_col text-align-center">Options</div>
     </div>
 
-    <app-events-list-item *ngFor="let event of events" [eventCode]="event.event_code" (eventDeleted)="onEventDeleted($event)"></app-events-list-item>
+    <app-events-list-item *ngFor="let event of events" [eventData]="event" [eventCode]="event.event_code" (eventDeleted)="onEventDeleted($event)"></app-events-list-item>
 
 </div>

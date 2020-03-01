@@ -43,6 +43,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UsersComponent } from './users/users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     SignUpComponent,
     ResetPasswordComponent,
     UsersComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    MyProfileComponent
   ],
   exports: [
     DashboardComponent,
