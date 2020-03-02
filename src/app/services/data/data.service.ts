@@ -51,6 +51,16 @@ export class DataService {
     });
   }
 
+  signUpUserWithNODEJS(email: string, password: string, firstName: string, lastName: string, userImage: string) {
+    return new Promise((resolve, reject) => {
+      return this.database.signUpUserWithNODEJS(email, password, firstName, lastName, userImage).then((result: any) => {
+          resolve(result);
+        }).catch(function(error: any) {
+          reject(error);
+        });
+    });
+  }
+
   signOutUser() {
     return new Promise((resolve, reject) => {
       return this.database.signOutUser().then((result: any) => {

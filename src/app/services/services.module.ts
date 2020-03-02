@@ -5,11 +5,13 @@ import { CommonModule } from '@angular/common';
 import { TranslationsService } from './translations/translations.service';
 import { AuthService } from './authentication/auth.service';
 import { AuthGuardService } from './authentication/auth-guard.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   providers: [
     FirebaseService,
