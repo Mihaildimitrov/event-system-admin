@@ -213,7 +213,7 @@ export class EventDetailsFeaturesComponent implements OnInit {
   drop(event: CdkDragDrop<string[]>) {
 
     if (event.previousContainer !== event.container) {
-      var featureItem;
+      let featureItem;
 
       if(event.container.id === "available-features-list") {
         featureItem = this.eventFeaturesData.selected[event.previousIndex];
@@ -240,14 +240,10 @@ export class EventDetailsFeaturesComponent implements OnInit {
   }
 
   saveEventFeatures() {
-    console.log("Save Event Features.");
-    console.log('this.eventFeaturesData : ', this.eventFeaturesData);
-
     const currentEventCode: any = this.route.snapshot.parent.params['id'];
     this.isSavingEventFeeaturesData = true;
 
     this.dataService.saveEventFeatures(currentEventCode, this.eventFeaturesData).then((result: any) => {
-      console.log(result);
       this.isSavingEventFeeaturesData = false;
       this.saveFeaturesShowSuccessfullyMessage();
     }, (error: any) => {
@@ -256,8 +252,6 @@ export class EventDetailsFeaturesComponent implements OnInit {
   }
 
   removeSelectedFeature(featureindex) {
-    console.log("Remove Selected Feature." + featureindex);
-
     let curFeatureData = this.eventFeaturesData.selected[featureindex];
 
     if(this.singleFeatures.indexOf(curFeatureData.type) > -1) {
@@ -282,7 +276,6 @@ export class EventDetailsFeaturesComponent implements OnInit {
       let currentFeatureType = this.eventFeaturesData.premium[featureIndex].type;
 
       for (let i = 0; i < this.eventFeaturesData.selected.length; i++) {
-        
         if(this.eventFeaturesData.selected[i].type === currentFeatureType) {
           currentIndexOfFeatureInSelected = i;
           removeFromSelected = true;
@@ -294,7 +287,6 @@ export class EventDetailsFeaturesComponent implements OnInit {
       }
       
       for (let i = 0; i < this.availableFeatures.length; i++) {
-        
         if(this.availableFeatures[i].type === currentFeatureType) {
           currentIndexOfFeatureInAvailable = i;
         }
@@ -323,7 +315,6 @@ export class EventDetailsFeaturesComponent implements OnInit {
     this.showLoadingEditEventFeatureModal = true;
 
     this.dataService.getEventData(currentEventCode).then((result: any) => {
-      console.log(result);
       this.showLoadingEditEventFeatureModal = false;
       this.currentEventSettings = result;
     }, (error: any) => {
@@ -333,15 +324,11 @@ export class EventDetailsFeaturesComponent implements OnInit {
   }
 
   saveEventFeature(modalElemRef: any) {
-    console.log('Save event feature.....');
-    // console.log('Current Feature: ', this.currentFeatureEditData);
-
     this.isSavingEventFeeatureData = true;
     this.eventFeaturesData.selected[this.currentFeatureEditIndexInArray] = this.currentFeatureEditData;
     const currentEventCode: any = this.route.snapshot.parent.params['id'];
 
     this.dataService.saveEventFeatures(currentEventCode, this.eventFeaturesData).then((result: any) => {
-      console.log(result);
       this.isSavingEventFeeatureData = false;
       setTimeout(() => {
         this.showEditEventFeatureModal = !this.showEditEventFeatureModal;
@@ -372,14 +359,11 @@ export class EventDetailsFeaturesComponent implements OnInit {
   ngOnInit() {
     const currentEventCode: any = this.route.snapshot.parent.params['id'];
     let component_this = this;
-
     // Get all features data from DB:
     this.dataService.getEventFeatures(currentEventCode).then((result: any) => {
-      console.log(result);
 
       if(result === false) {
         this.eventFeaturesData.premium = this.premiumFeatures;
-        
       } else {
         if(!result.premium.length) {
           this.eventFeaturesData.premium = this.premiumFeatures;
@@ -397,12 +381,11 @@ export class EventDetailsFeaturesComponent implements OnInit {
   
           if(premiumFeature.is_active) {
             component_this.eventFeaturesData.selected.filter(function(selectedFeature){
-            
               if(premiumFeature.type == selectedFeature.type) {
                 preFeatureIsSelected = true;
               }
             });
-    
+  
             if(!preFeatureIsSelected) {
               component_this.availableFeatures.push(premiumFeature);
             }
@@ -419,9 +402,7 @@ export class EventDetailsFeaturesComponent implements OnInit {
             } 
           });
           
-          if(!is_exist) {
-            return true;
-          }
+          if(!is_exist) { return true; }
           return false;
         });
   
@@ -429,7 +410,6 @@ export class EventDetailsFeaturesComponent implements OnInit {
 
         // Hide loading mask:
         this.stillLoadingContent = false;
-
     }, (error: any) => {
       console.log(error);
     });

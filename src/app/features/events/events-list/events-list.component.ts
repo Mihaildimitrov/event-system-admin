@@ -21,7 +21,6 @@ export class EventsListComponent implements OnInit, AfterViewInit {
       }
 
       result.forEach((event: any) => {
-        console.log(event.data());
           this.events.push(event.data());
       });
 

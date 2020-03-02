@@ -198,7 +198,6 @@ export class DataService {
       let allLoadedModules = 0;
 
       if (newIcon !== null) {
-        console.log("Upload new Icon");
         numberToLoad++;
 
         // Delete old icon image:
@@ -231,7 +230,6 @@ export class DataService {
       }
 
       if (newCover !== null) {
-        console.log("Upload new Cover");
         numberToLoad++;
         // Delete old icon image:
 
@@ -317,7 +315,6 @@ export class DataService {
   saveEventHomePageDesign(eventCode: string, data: any, newCover = null) {
     return new Promise((resolve, reject) => {
       if (newCover !== null) {
-        console.log("Upload new Cover");
         let module_this = this;
 
         // Save new icon image:

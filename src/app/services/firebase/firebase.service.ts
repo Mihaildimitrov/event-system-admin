@@ -123,7 +123,6 @@ export class FirebaseService {
         .doc(eventCode)
         .get()
         .then(function(doc: any) {
-          console.log('doc', doc);
           if (doc.exists) {
             resolve(true);
           } else {

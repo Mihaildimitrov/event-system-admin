@@ -118,18 +118,6 @@ export class EventDetailsTranslationsComponent implements OnInit {
       console.log(error);
     });
   }
-
-  searchTranslations(word) {
-    console.log('Search for => ', word);
-
-    for (const currentLanguage in this.eventTranslations) {
-      if (this.eventTranslations.hasOwnProperty(currentLanguage)) {
-        const currentTranslations = this.eventTranslations[currentLanguage];
-        
-      }
-    }
-  } 
-
 }
 
 

@@ -20,22 +20,11 @@ export class EventDetailsSideNavigationComponent implements OnInit {
   ngOnInit() {
     const currentEventCode: any = this.route.snapshot.params['id'];
 
-    this.dataService.getEventData(currentEventCode).then((result: any) => {
-      console.log('NOT Real time doc => ', result);
-      this.eventSettings = result;
-      this.eventType = this.eventSettings.event_type;
-      this.isStillLoading = false;
-    }, (error: any) => {
-      console.log(error);
-    });
-
     let firestoreEventConfigurationsReference = this.dataService.getFirestoreEventConfigurationsReference(currentEventCode);
-    firestoreEventConfigurationsReference.onSnapshot(function(doc) {
-      console.log('Real time doc => ', doc.data());
+    firestoreEventConfigurationsReference.onSnapshot((doc) => {
       this.eventSettings = doc.data();
       this.eventType = this.eventSettings.event_type;
       this.isStillLoading = false;
-      console.log(this.eventType);
     });
   }
 

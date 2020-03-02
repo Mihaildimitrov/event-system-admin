@@ -19,7 +19,6 @@ export class AuthService {
     let self = this;
 
     this.FirebaseAuthReference.onAuthStateChanged(function(user) {
-      console.log('Logged user', user);
       
       if (user) {
           localStorage.setItem('loggedUserStatus', 'true');

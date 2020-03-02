@@ -25,8 +25,6 @@ export class EventsListItemComponent implements OnInit {
     this.showDeleteEventModal = !this.showDeleteEventModal;
   }
 
-  ngOnInit() {
-    console.log('eventData => ', this.eventData);
-  }
+  ngOnInit() {}
 
 }

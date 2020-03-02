@@ -82,7 +82,6 @@ export class EventDetailsSettingsComponent implements OnInit {
 
     const currentEventCode: any = this.route.snapshot.parent.params['id'];
     this.dataService.getEventData(currentEventCode).then((result: any) => {
-      console.log(result);
       this.eventSettings = result;
       this.stillLoadingContent = false;
     }, (error: any) => {
@@ -114,7 +113,6 @@ export class EventDetailsSettingsComponent implements OnInit {
   saveEventSettings() {
     this.isSavingEventSettingsData = true;
     this.resetEventFormFieldsStatus();
-    console.log(this.eventSettings);
     let settings = this.eventSettings;
     let isSettingsValid = true;
 
@@ -176,10 +174,8 @@ export class EventDetailsSettingsComponent implements OnInit {
     
     if(isSettingsValid) {
       // Submit event settings
-      console.log('Settings are valid!');
 
       this.dataService.saveEventData(settings).then((result: any) => {
-        console.log(result);
         this.isSavingEventSettingsData = false;
         this.saveSettingsShowSuccessMsg = true;
         setTimeout(() => {
@@ -190,8 +186,6 @@ export class EventDetailsSettingsComponent implements OnInit {
       });
 
     } else {
-      console.log('Show error messages!');
-      console.log(this.eventSettingsFieldsStatus);
       this.isSavingEventSettingsData = false;
     }
   }
