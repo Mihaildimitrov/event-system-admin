@@ -15,9 +15,9 @@
     <div class="user-settings-box">
         <div class="user-name-box">
             <div class="greeting">Welcome, </div>
-            <div class="user-name">Mihail Dimitrov</div>
+            <div class="user-name">{{currentLoggedUser.first_name}} {{currentLoggedUser.last_name}}</div>
         </div>
-        <img src="https://cjmart.jp/en/upload/save_image/0128_190824_mp4otl_y_3.jpg" alt="">
+        <img src="{{currentLoggedUser.user_image}}" alt="">
         <div class="user-menu-box animated fadeInDown">
             <ul class="user-menu-list">
                 <li class="menu-list-item" routerLinkActive="active" [routerLink]="['myprofile']"><i class="far fa-user-cog"></i> <span>My Profile</span></li>

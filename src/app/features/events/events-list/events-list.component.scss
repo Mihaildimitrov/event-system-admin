@@ -2,7 +2,7 @@
     width: 100%;
     justify-content: center;
     div {
-          text-align: center;
+        text-align: center;
     }
 }
 
@@ -22,4 +22,14 @@
 
 .events_list_container {
     padding: 10px;
+    .events_list_header_row_container {
+        background-color: #d1d8e0;
+        // padding: 5px;
+        font-weight: bold;
+        text-align: center;
+        .list_item_header_col {
+            border: 1px solid #fff;
+            padding: 5px;
+        }
+    }
 }

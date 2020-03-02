@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private loggedUserData: object = {};
+  public loggedUserData: any = {};
   private FirebaseAuthReference: any = null;
   private currentUserSubject: BehaviorSubject<any>;
   public currentLoggedUser: Observable<any>;
@@ -27,7 +27,7 @@ export class AuthService {
           localStorage.removeItem('loggedUserStatus');
       }
       self.loggedUserData = user;
-      // localStorage.setItem('loggedUserData', JSON.stringify(self.loggedUserData));
+      localStorage.setItem('loggedUserData', JSON.stringify(self.loggedUserData));
       self.currentUserSubject.next(localStorage.getItem('loggedUserStatus'));
     });
   }
@@ -37,7 +37,8 @@ export class AuthService {
   }
 
   public get currentLoggedUserData() {
-    return this.loggedUserData;
+    // return this.loggedUserData;
+    return JSON.parse(localStorage.getItem('loggedUserData'));
   }
 
   sendPasswordResetEmail(email: string) {
@@ -60,9 +61,9 @@ export class AuthService {
     });
   }
 
-  signUpUser(email: string, password: string, firstName: string, lastName: string) {
+  signUpUser(email: string, password: string, firstName: string, lastName: string, userImage: string) {
     return new Promise((resolve, reject) => {
-      return this.dataService.signUpUser(email, password, firstName, lastName).then((result: any) => {
+      return this.dataService.signUpUser(email, password, firstName, lastName, userImage).then((result: any) => {
         resolve(result);
       }).catch(function(error: any) {
         reject(error);
@@ -73,6 +74,16 @@ export class AuthService {
   signOutUser() {
     return new Promise((resolve, reject) => {
       return this.dataService.signOutUser().then((result: any) => {
+        resolve(result);
+      }).catch(function(error: any) {
+        reject(error);
+      });
+    });
+  }
+
+  getUserFields(uid: string) {
+    return new Promise((resolve, reject) => {
+      return this.dataService.getUserFields(uid).then((result: any) => {
         resolve(result);
       }).catch(function(error: any) {
         reject(error);

@@ -70,12 +70,12 @@ export class FirebaseService {
     });
   }
 
-  signUpUser(email: string, password: string, firstName: string, lastName: string) {
+  signUpUser(email: string, password: string, firstName: string, lastName: string, userImage: string) {
     return new Promise((resolve, reject) => {
       let self = this;
       this.AUTH.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function() {
         self.AUTH.createUserWithEmailAndPassword(email, password).then(function(data) {
-          self.addNewUserInUsersListOnRegister(data.user.uid, firstName, lastName).then(function(success) {
+          self.addNewUserInUsersListOnRegister(data.user.uid, firstName, lastName, userImage).then(function(success) {
             resolve(success);
           }).catch(function(error) {
               console.log('Error with code -> ' + error.code + ' message -> ' + error.message);
@@ -104,16 +104,31 @@ export class FirebaseService {
   }
 
   // USERS
-  addNewUserInUsersListOnRegister(userId: string, firstName: string, lastName: string) {
+  addNewUserInUsersListOnRegister(userId: string, firstName: string, lastName: string, userImage: string) {
     return new Promise((resolve, reject) => {
       this.FDB.collection("users").doc(userId).set({
         first_name: firstName,
-        last_name: lastName
+        last_name: lastName,
+        user_image: userImage
       }, { merge: true }).then(function(success) {
           resolve(success);
         }).catch(function(error: any) {
           reject(error);
         });
+    });
+  }
+
+  getUserFields(uid: string) {
+    return new Promise((resolve, reject) => {
+      this.FDB.collection("users").doc(uid).get().then(function(doc: any) {
+        if (doc.exists) {
+          resolve(doc.data());
+        } else {
+          reject("No such document!");
+        }
+      }).catch(function(error: any) {
+        reject(error);
+      });
     });
   }
 

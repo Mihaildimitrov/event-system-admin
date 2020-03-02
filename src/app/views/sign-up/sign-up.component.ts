@@ -37,7 +37,7 @@ export class SignUpComponent implements OnInit {
     this.signUpFormSuccess = false;
     
     if(this.signUpForm.value.email !== "" && this.signUpForm.value.password !== "") {
-      this.authService.signUpUser(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.firstName, this.signUpForm.value.lastName).then((result: any) => {
+      this.authService.signUpUser(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.firstName, this.signUpForm.value.lastName, '/assets/img/user-avatar.png').then((result: any) => {
         this.signUpFormLoadingNow = false;
         this.signUpFormSuccess = true;
         setTimeout(() => {

@@ -41,9 +41,9 @@ export class DataService {
     });
   }
 
-  signUpUser(email: string, password: string, firstName: string, lastName: string) {
+  signUpUser(email: string, password: string, firstName: string, lastName: string, userImage: string) {
     return new Promise((resolve, reject) => {
-      return this.database.signUpUser(email, password, firstName, lastName).then((result: any) => {
+      return this.database.signUpUser(email, password, firstName, lastName, userImage).then((result: any) => {
           resolve(result);
         }).catch(function(error: any) {
           reject(error);
@@ -54,6 +54,16 @@ export class DataService {
   signOutUser() {
     return new Promise((resolve, reject) => {
       return this.database.signOutUser().then((result: any) => {
+          resolve(result);
+        }).catch(function(error: any) {
+          reject(error);
+        });
+    });
+  }
+
+  getUserFields(uid: string) {
+    return new Promise((resolve, reject) => {
+      return this.database.getUserFields(uid).then((result: any) => {
           resolve(result);
         }).catch(function(error: any) {
           reject(error);

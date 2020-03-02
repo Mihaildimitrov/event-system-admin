@@ -1,40 +1,44 @@
 <div>
-  <div class="mb-row event_list_item_container">
-    <div class="mb-col-sm-7 list_item_single_box">{{eventData.title}}</div>
-    <div class="mb-col list_item_single_box text-align-center">{{eventData.event_type}}</div>
-    <div class="mb-col list_item_single_box text-align-center eventcode_box">{{eventData.event_code}}</div>
-    <div class="mb-col list_item_single_box text-align-center" *ngIf="eventData.is_published"><span
-        class="event_type_status_published">PUBLISHED</span></div>
-    <div class="mb-col list_item_single_box text-align-center" *ngIf="!eventData.is_published"><span
-        class="event_type_status_draft">DRAFT</span></div>
-    <div class="mb-col list_item_single_box text-align-center">
-      <div class="mb-row">
-        <span routerLink="/event/{{eventData.event_code}}" class="mb-col">
+    <div class="mb-row event_list_item_container">
+        <div class="mb-col-sm-4 list_item_single_box">
+            <!-- <img src="https://cjmart.jp/en/upload/save_image/0128_190824_mp4otl_y_3.jpg" alt=""> -->
+            <span>{{eventData.title}}</span>
+        </div>
+        <div class="mb-col list_item_single_box text-align-center">{{eventData.date_created | date}}</div>
+        <div class="mb-col list_item_single_box text-align-center">{{eventData.start_date | date}}</div>
+        <div class="mb-col list_item_single_box text-align-center">{{eventData.end_date | date}}</div>
+        <div class="mb-col list_item_single_box text-align-center">{{eventData.event_type}}</div>
+        <div class="mb-col list_item_single_box text-align-center eventcode_box">{{eventData.event_code}}</div>
+        <div class="mb-col list_item_single_box text-align-center" *ngIf="eventData.is_published"><span class="event_type_status_published">PUBLISHED</span></div>
+        <div class="mb-col list_item_single_box text-align-center" *ngIf="!eventData.is_published"><span class="event_type_status_draft">DRAFT</span></div>
+        <div class="mb-col list_item_single_box text-align-center">
+            <div class="mb-row">
+                <span routerLink="/event/{{eventData.event_code}}" class="mb-col">
           <i class="fal fa-pen"></i>
         </span>
-        <span (click)="toggleModalRemoveEvent()" class="mb-col">
+                <span (click)="toggleModalRemoveEvent()" class="mb-col">
           <i class="fal fa-trash"></i>
         </span>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div *ngIf="isEventSetingsDownloaded" id="delete_event_modal" class="modal" [class.is-active]="showDeleteEventModal">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Delete Event</p>
-        <button (click)="toggleModalRemoveEvent()" class="delete" aria-label="close"></button>
-      </header>
-      <section class="modal-card-body">
-  
-        <h3>Delete event <b>{{eventData.title}}</b>. Are you sure?</h3>
-  
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button is-danger" (click)="doRemoveEvent()">Delete</button>
-        <button class="button" (click)="toggleModalRemoveEvent()">Cancel</button>
-      </footer>
+    <div *ngIf="isEventSetingsDownloaded" id="delete_event_modal" class="modal" [class.is-active]="showDeleteEventModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Delete Event</p>
+                <button (click)="toggleModalRemoveEvent()" class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+
+                <h3>Delete event <b>{{eventData.title}}</b>. Are you sure?</h3>
+
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-danger" (click)="doRemoveEvent()">Delete</button>
+                <button class="button" (click)="toggleModalRemoveEvent()">Cancel</button>
+            </footer>
+        </div>
     </div>
-  </div>
 </div>
