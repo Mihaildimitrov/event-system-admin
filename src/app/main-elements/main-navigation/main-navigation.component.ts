@@ -14,13 +14,8 @@ export class MainNavigationComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    console.log('Current logged user: ', this.authService.currentLoggedUserData);
-    console.log('User UID: ', this.authService.currentLoggedUserData.uid);
-
     this.authService.getUserFields(this.authService.currentLoggedUserData.uid).then((result: any) => {
-      console.log('User DATA: ', result);
       this.currentLoggedUser = result;
-      console.log('this.currentLoggedUser', this.currentLoggedUser);
     }, (error: any) => {
       console.log(error);
     });
