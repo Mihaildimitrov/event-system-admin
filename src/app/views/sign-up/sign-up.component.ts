@@ -28,7 +28,15 @@ export class SignUpComponent implements OnInit {
 
   get getFormFieldRef() { return this.signUpForm.controls; }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.authService.signUpUserWithNODEJS(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.firstName, this.signUpForm.value.lastName, '/assets/img/user-avatar.png').then((result: any) => {
+      console.log('result', result);
+    }, (error: any) => {
+      console.log('error', error);
+    });
+
+  }
 
   signUpUser() {
     this.signUpFormLoadingNow = true;

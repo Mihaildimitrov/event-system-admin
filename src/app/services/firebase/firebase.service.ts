@@ -32,6 +32,8 @@ export class FirebaseService {
     this.FDB = firebase.firestore();
     this.FS = firebase.storage();
     this.AUTH = firebase.auth();
+
+    console.log(this.http);
   }
 
   // AUTH:
@@ -97,6 +99,7 @@ export class FirebaseService {
     return new Promise((resolve, reject) => {
       const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
       const body = { title: 'Angular POST Request Example' };
+      console.log(this.http);
       this.http.post('https://jsonplaceholder.typicode.com/invalid-url', body, { headers }).subscribe({
           next: data => {
             console.log('data', data);
