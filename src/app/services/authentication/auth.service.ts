@@ -21,10 +21,16 @@ export class AuthService {
     this.FirebaseAuthReference.onAuthStateChanged(function(user) {
       
       if (user) {
+          // console.log('user:', user);
           localStorage.setItem('loggedUserStatus', 'true');
           self.setFBTokenInCookie(user.ra);
+          self.FirebaseAuthReference.currentUser.getIdTokenResult().then((idTokenResult) => {
+            self.setCookieProp('currentLoggedUserRole', idTokenResult.claims.user_role);
+          }).catch((error) => { console.log(error); });
       } else {
           localStorage.removeItem('loggedUserStatus');
+          self.deleteCookieProp('currentLoggedUserRole');
+          self.deleteCookieProp('firebaseToken');
       }
       self.loggedUserData = user;
       localStorage.setItem('loggedUserData', JSON.stringify(self.loggedUserData));
@@ -37,8 +43,17 @@ export class AuthService {
   }
 
   public get currentLoggedUserData() {
-    // return this.loggedUserData;
     return JSON.parse(localStorage.getItem('loggedUserData'));
+  }
+
+  getCurrentLoggedUserCustomClaims() {
+    return new Promise((resolve, reject) => {
+      return this.FirebaseAuthReference.currentUser.getIdTokenResult().then((result: any) => {
+        resolve(result.claims);
+      }).catch(function(error: any) {
+        reject(error);
+      });
+    });
   }
 
   sendPasswordResetEmail(email: string) {
@@ -71,9 +86,9 @@ export class AuthService {
     });
   }
 
-  signUpUserWithNODEJS(email: string, password: string, firstName: string, lastName: string, userImage: string) {
+  signUpUserWithNODEJS(email: string, password: string, firstName: string, lastName: string, role:string, userImage: string) {
     return new Promise((resolve, reject) => {
-      return this.dataService.signUpUserWithNODEJS(email, password, firstName, lastName, userImage).then((result: any) => {
+      return this.dataService.signUpUserWithNODEJS(email, password, firstName, lastName, role, userImage).then((result: any) => {
         resolve(result);
       }).catch(function(error: any) {
         reject(error);
@@ -99,6 +114,31 @@ export class AuthService {
         reject(error);
       });
     });
+  }
+
+  
+  setCookieProp(key: string, value: string) {
+    document.cookie = key + "=" + value;
+  }
+
+  deleteCookieProp(key) {   
+    document.cookie = key + '=; Max-Age=-99999999;';  
+  }
+
+  getCookiePropValue(key: string) {
+    let name = key + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
   }
 
   setFBTokenInCookie(token) {

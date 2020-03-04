@@ -28,15 +28,7 @@ export class SignUpComponent implements OnInit {
 
   get getFormFieldRef() { return this.signUpForm.controls; }
 
-  ngOnInit() {
-
-    this.authService.signUpUserWithNODEJS(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.firstName, this.signUpForm.value.lastName, '/assets/img/user-avatar.png').then((result: any) => {
-      console.log('result', result);
-    }, (error: any) => {
-      console.log('error', error);
-    });
-
-  }
+  ngOnInit() {}
 
   signUpUser() {
     this.signUpFormLoadingNow = true;
@@ -45,17 +37,38 @@ export class SignUpComponent implements OnInit {
     this.signUpFormSuccess = false;
     
     if(this.signUpForm.value.email !== "" && this.signUpForm.value.password !== "") {
-      this.authService.signUpUser(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.firstName, this.signUpForm.value.lastName, '/assets/img/user-avatar.png').then((result: any) => {
-        this.signUpFormLoadingNow = false;
-        this.signUpFormSuccess = true;
-        setTimeout(() => {
-          this.router.navigate(['/dashboard']);
-        }, 1000);
+
+      this.authService.signUpUserWithNODEJS(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.firstName, this.signUpForm.value.lastName, 'admin', '/assets/img/user-avatar.png').then((result: any) => {
+        console.log('result', result);
+
+        this.authService.signInUser(this.signUpForm.value.email, this.signUpForm.value.password).then((result: any) => {
+          this.signUpFormLoadingNow = false;
+          this.signUpFormSuccess = true;
+          setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+          }, 1000);
+        }, (error: any) => {
+          this.signUpFormLoadingNow = false;
+          this.signUpFormWrong = true;
+        });
       }, (error: any) => {
+        console.log('error', error);
         this.signUpFormLoadingNow = false;
         this.signUpFormWrong = true;
       });
+      
+      // this.authService.signUpUser(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.firstName, this.signUpForm.value.lastName, '/assets/img/user-avatar.png').then((result: any) => {
+      //   this.signUpFormLoadingNow = false;
+      //   this.signUpFormSuccess = true;
+      //   setTimeout(() => {
+      //     this.router.navigate(['/dashboard']);
+      //   }, 1000);
+      // }, (error: any) => {
+      //   this.signUpFormLoadingNow = false;
+      //   this.signUpFormWrong = true;
+      // });
     }
+
   }
 
   openSignIn() {

@@ -32,8 +32,6 @@ export class FirebaseService {
     this.FDB = firebase.firestore();
     this.FS = firebase.storage();
     this.AUTH = firebase.auth();
-
-    console.log(this.http);
   }
 
   // AUTH:
@@ -95,14 +93,20 @@ export class FirebaseService {
     });
   }
 
-  signUpUserWithNODEJS(email: string, password: string, firstName: string, lastName: string, userImage: string) {
+  signUpUserWithNODEJS(email: string, password: string, firstName: string, lastName: string, role: string, userImage: string) {
     return new Promise((resolve, reject) => {
-      const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
-      const body = { title: 'Angular POST Request Example' };
+      const headers = {};
+      const body = { 
+        userEmail: email,
+        userPassword: password,
+        userFirstName: firstName,
+        userLastName: lastName,
+        userRole: role,
+        userImageUrl: userImage,
+      };
       console.log(this.http);
-      this.http.post('https://jsonplaceholder.typicode.com/invalid-url', body, { headers }).subscribe({
+      this.http.post('https://us-central1-event-system-49b35.cloudfunctions.net/signUpUser', body, { headers }).subscribe({
           next: data => {
-            console.log('data', data);
             resolve(true);
           },
           error: error => {

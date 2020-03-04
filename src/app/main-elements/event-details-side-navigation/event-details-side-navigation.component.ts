@@ -25,6 +25,8 @@ export class EventDetailsSideNavigationComponent implements OnInit {
       this.eventSettings = doc.data();
       this.eventType = this.eventSettings.event_type;
       this.isStillLoading = false;
+
+      console.log('this.eventSettings', this.eventSettings);
     });
   }
 

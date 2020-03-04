@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { FirebaseService } from "./../firebase/firebase.service";
 import { Injectable } from "@angular/core";
 
@@ -7,8 +8,8 @@ import { Injectable } from "@angular/core";
 export class DataService {
   private database: any;
 
-  constructor() {
-    this.database = new FirebaseService();
+  constructor(private http: HttpClient) {
+    this.database = new FirebaseService(this.http);
   }
 
   // ========================================================================
@@ -51,9 +52,9 @@ export class DataService {
     });
   }
 
-  signUpUserWithNODEJS(email: string, password: string, firstName: string, lastName: string, userImage: string) {
+  signUpUserWithNODEJS(email: string, password: string, firstName: string, lastName: string, role: string, userImage: string) {
     return new Promise((resolve, reject) => {
-      return this.database.signUpUserWithNODEJS(email, password, firstName, lastName, userImage).then((result: any) => {
+      return this.database.signUpUserWithNODEJS(email, password, firstName, lastName, role, userImage).then((result: any) => {
           resolve(result);
         }).catch(function(error: any) {
           reject(error);
