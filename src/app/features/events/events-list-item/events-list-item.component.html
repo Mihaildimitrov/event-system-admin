@@ -13,12 +13,8 @@
         <div class="mb-col list_item_single_box text-align-center" *ngIf="!eventData.is_published"><span class="event_type_status_draft">DRAFT</span></div>
         <div class="mb-col list_item_single_box text-align-center">
             <div class="mb-row">
-                <span routerLink="/event/{{eventData.event_code}}" class="mb-col">
-          <i class="fal fa-pen"></i>
-        </span>
-                <span (click)="toggleModalRemoveEvent()" class="mb-col">
-          <i class="fal fa-trash"></i>
-        </span>
+                <span routerLink="/event/{{eventData.event_code}}" class="mb-col"><i class="fal fa-pen"></i></span>
+                <span (click)="toggleModalRemoveEvent()" class="mb-col"><i class="fal fa-trash"></i></span>
             </div>
         </div>
     </div>

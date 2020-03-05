@@ -1,3 +1,9 @@
-<p>users-list works!</p>
-
-<app-users-list-item></app-users-list-item>
+<div class="mb-row users-table-header-row">
+    <div class="mb-col-sm-1 text-align-left users-table-header-col">Image</div>
+    <div class="mb-col text-align-left users-table-header-col">First name</div>
+    <div class="mb-col text-align-left users-table-header-col">Last name</div>
+    <div class="mb-col text-align-left users-table-header-col">Email</div>
+    <div class="mb-col-sm-1 text-align-left users-table-header-col">Role</div>
+    <div class="mb-col-sm-1 text-align-center users-table-header-col">Options</div>
+</div>
+<app-users-list-item *ngFor="let user of users" [user]="user"></app-users-list-item>

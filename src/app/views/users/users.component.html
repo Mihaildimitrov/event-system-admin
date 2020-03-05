@@ -1,3 +1,44 @@
-<p>users works!</p>
+<div *ngIf="stillLoading" class="mb-container content-view-loading-outer">
+    <div class="content-view-loading-inner">
+        <mat-spinner [diameter]="30"></mat-spinner>
+    </div>
+</div>
 
-<app-users-list></app-users-list>
+<div *ngIf="!stillLoading" class="users-container">
+
+    <div class="users-navigation-container">
+        <div class="mb-row">
+            <div class="mb-col search-container">
+                <div class="padding-10 text-align-left">
+                    <input [value]="searchWord" (input)="searchWord = $event.target.value" type="text">
+                </div>
+            </div>
+            <div class="mb-col users-list-options">
+                <div class="padding-10 text-align-right">
+                    <button *ngIf="users.length" class="button">Delete all</button>
+                    <button class="button">Create new</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="users.length" class="users-list-container padding-10">
+        <div class="list-box">
+            <app-users-list [users]="users"></app-users-list>
+        </div>
+        <div class="list-pagination-box">
+            <div class="mb-row">
+                <div class="mb-col text-align-center padding-10">
+                    <small (click)="prevPage()" class="pagination-btn"><i class="fal fa-chevron-double-left"></i> Prev</small>
+                    <small>Page: {{pagesStartPoints.length}}</small>
+                    <small (click)="nextPage()" class="pagination-btn">Next <i class="fal fa-chevron-double-right"></i></small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!users.length" class="users-list-empty-box padding-10 text-align-center">
+        There are no users!
+    </div>
+
+</div>

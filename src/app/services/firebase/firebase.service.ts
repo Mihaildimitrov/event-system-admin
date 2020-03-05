@@ -157,6 +157,21 @@ export class FirebaseService {
     });
   }
 
+  getSystemUsers(startDoc: any = null, limit: number = 10) {
+    return new Promise((resolve, reject) => {
+      let query = this.FDB.collection("users").orderBy("first_name").orderBy("last_name").limit(limit);
+      if(startDoc !== null) {
+        query = this.FDB.collection("users").orderBy("first_name").orderBy("last_name").startAfter(startDoc).limit(limit);
+      }
+
+      query.get().then(function(collection: any) {
+        resolve(collection.docs);
+      }).catch(function(error: any) {
+        reject(error);
+      });
+    });
+  }
+
   checkIfEventExists(eventCode: string) {
     return new Promise((resolve, reject) => {
       this.FDB.collection("events_data")

@@ -82,6 +82,17 @@ export class DataService {
     });
   }
 
+  getSystemUsers(startDoc: any = null) {
+    return new Promise((resolve, reject) => {
+      return this.database.getSystemUsers(startDoc).then((result: any) => {
+          resolve(result);
+        }).catch(function(error: any) {
+          reject(error);
+        });
+    });
+  }
+
+
   // ========================================================================
   // Event CRUD:
   checkIfEventExists(eventCode: string) {

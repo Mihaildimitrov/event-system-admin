@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-users-list-item',
@@ -9,7 +9,13 @@ export class UsersListItemComponent implements OnInit {
 
   constructor() { }
 
+  @Input() user: any;
+
   ngOnInit() {
+  }
+
+  toggleModalRemoveUser() {
+    
   }
 
 }
