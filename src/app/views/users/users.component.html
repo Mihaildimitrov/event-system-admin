@@ -15,7 +15,7 @@
             </div>
             <div class="mb-col users-list-options">
                 <div class="padding-10 text-align-right">
-                    <button *ngIf="users.length" class="button">Delete all</button>
+                    <button *ngIf="users.length" class="button hide">Delete all</button>
                     <button class="button">Create new</button>
                 </div>
             </div>
@@ -23,15 +23,20 @@
     </div>
 
     <div *ngIf="users.length" class="users-list-container padding-10">
-        <div class="list-box">
+        <div *ngIf="!stillLoadingUsersPage" class="list-box">
             <app-users-list [users]="users"></app-users-list>
+        </div>
+        <div *ngIf="stillLoadingUsersPage" class="mb-container-users content-view-loading-outer">
+            <div class="content-view-loading-inner">
+                <mat-spinner [diameter]="30"></mat-spinner>
+            </div>
         </div>
         <div class="list-pagination-box">
             <div class="mb-row">
                 <div class="mb-col text-align-center padding-10">
-                    <small (click)="prevPage()" class="pagination-btn"><i class="fal fa-chevron-double-left"></i> Prev</small>
-                    <small>Page: {{pagesStartPoints.length}}</small>
-                    <small (click)="nextPage()" class="pagination-btn">Next <i class="fal fa-chevron-double-right"></i></small>
+                    <button [disabled]="!showPrevBtn" (click)="prevPage()" class="button pagination-btn pagination-btn-prev"><div><i class="fal fa-chevron-double-left"></i></div> <div class="btn-prev">Prev</div></button>
+                    <small class="page-number-counter">Page: </small>
+                    <button [disabled]="!showNextBtn" (click)="nextPage()" class="button pagination-btn pagination-btn-next"><div class="btn-next">Next</div> <div><i class="fal fa-chevron-double-right"></i></div></button>
                 </div>
             </div>
         </div>

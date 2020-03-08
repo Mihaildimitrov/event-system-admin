@@ -7,6 +7,10 @@
     height: calc(100vh - 120px);
 }
 
+.mb-container-users {
+    height: 60vh;
+}
+
 .users-container {
     .users-navigation-container {
         .search-container {
@@ -35,32 +39,27 @@
         .list-box {}
         .list-pagination-box {
             margin: 2rem auto;
-            button {
-                vertical-align: middle;
-                padding: 0 2rem;
-                margin: auto 10px;
-                background-color: transparent;
+            .pagination-btn {
+                background: #1d2531;
+                transition: all 0.3s ease-out;
+                color: #fff;
+                margin: auto 20px;
                 border: 1px solid #1d2531;
-                color: #1d2531;
-            }
-            small {
                 vertical-align: middle;
-                margin: auto 10px;
-                &.pagination-btn {
-                    font-weight: 500;
-                    cursor: pointer;
-                    transition: all 0.2s ease-in-out;
-                    &:hover {
-                        // font-weight: bold;
-                        border-bottom: 1px solid gray;
-                        i {
-                            // font-weight: bold;
-                        }
-                    }
-                    i {
-                        font-weight: 500;
-                    }
+                .btn-prev {
+                    margin-left: 5px;
                 }
+                .btn-next {
+                    margin-right: 5px;
+                }
+            }
+            .page-number-counter {
+                display: inline-block;
+                vertical-align: middle;
+            }
+            vertical-align: middle;
+            i {
+                vertical-align: middle;
             }
         }
     }
