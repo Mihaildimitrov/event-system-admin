@@ -35,7 +35,7 @@
             <div class="mb-row">
                 <div class="mb-col text-align-center padding-10">
                     <button [disabled]="!showPrevBtn" (click)="prevPage()" class="button pagination-btn pagination-btn-prev"><div><i class="fal fa-chevron-double-left"></i></div> <div class="btn-prev">Prev</div></button>
-                    <small class="page-number-counter">Page: </small>
+                    <small class="page-number-counter">Page: {{pagesFirstDocuments.length}}</small>
                     <button [disabled]="!showNextBtn" (click)="nextPage()" class="button pagination-btn pagination-btn-next"><div class="btn-next">Next</div> <div><i class="fal fa-chevron-double-right"></i></div></button>
                 </div>
             </div>

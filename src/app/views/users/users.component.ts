@@ -22,7 +22,6 @@ export class UsersComponent implements OnInit {
   private getUsersPage(startPointDoc = null, nextPage = false, prevPage = false) {
     
     this.dataService.getSystemUsers(startPointDoc).then((usersResponse: any) => {
-      console.log('usersResponse', usersResponse);
       if(this.stillLoading) { this.stillLoading = false; }
       if(this.stillLoadingUsersPage) { this.stillLoadingUsersPage = false; }
       if(!usersResponse.length) {
@@ -42,9 +41,7 @@ export class UsersComponent implements OnInit {
         } else {}
   
         this.users = usersResponse.map(x => x.data());
-  
-        console.log('this.pagesFirstDocuments', this.pagesFirstDocuments);
-        console.log('this.pagesLastDocuments', this.pagesLastDocuments);
+
         if(this.pagesFirstDocuments.length >= 2) {
           this.showPrevBtn = true;
         } else {
@@ -69,7 +66,6 @@ export class UsersComponent implements OnInit {
 
   prevPage() {
     this.stillLoadingUsersPage = true;
-
     if(this.pagesFirstDocuments.length === 1) {
       this.getUsersPage();
     } else {
