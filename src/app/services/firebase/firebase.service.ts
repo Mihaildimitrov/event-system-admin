@@ -103,7 +103,7 @@ export class FirebaseService {
         userLastName: lastName,
         userRole: role,
         userImageUrl: userImage,
-        searchTerms: [firstName, lastName, email, email.split('@')[0], role]
+        searchTerms: [firstName.toLowerCase(), lastName.toLowerCase(), email.toLowerCase(), email.split('@')[0].toLowerCase(), role.toLowerCase()]
       };
       console.log(this.http);
       this.http.post('https://us-central1-event-system-49b35.cloudfunctions.net/signUpUser', body, { headers }).subscribe({
@@ -173,12 +173,16 @@ export class FirebaseService {
     });
   }
 
-  getSystemUsersV2(searchWord: string = null, startDoc: any = null, limit: number = 12) {
+  getSystemUsersV2(startDoc: any = null, searchWord: string = '', limit: number = 12) {
     return new Promise((resolve, reject) => {
       let query = this.FDB.collection("users").orderBy("first_name").orderBy("last_name").limit(limit);
-      if(startDoc !== null) {
+      if(startDoc !== null && searchWord.length) {
+        query = this.FDB.collection("users").where("searchTerms", "array-contains", searchWord.toLowerCase()).orderBy("first_name").orderBy("last_name").startAfter(startDoc).limit(limit);
+      } else if(startDoc !== null) {
         query = this.FDB.collection("users").orderBy("first_name").orderBy("last_name").startAfter(startDoc).limit(limit);
-      }
+      } else if(searchWord.length) {
+        query = this.FDB.collection("users").where("searchTerms", "array-contains", searchWord.toLowerCase()).orderBy("first_name").orderBy("last_name").limit(limit);
+      } else {}
 
       query.get().then(function(collection: any) {
         resolve(collection.docs);

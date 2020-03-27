@@ -6,9 +6,10 @@ import { AppRoutingModule } from '../app-routing.module';
 import { EventDetailsSideNavigationComponent } from './event-details-side-navigation/event-details-side-navigation.component';
 import { SaveButtonComponent } from './save-button/save-button.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { InputSearchComponent } from './input-search/input-search.component';
 
 @NgModule({
-  declarations: [MainNavigationComponent, MainFooterComponent, EventDetailsSideNavigationComponent, SaveButtonComponent, LoadingSpinnerComponent],
+  declarations: [MainNavigationComponent, MainFooterComponent, EventDetailsSideNavigationComponent, SaveButtonComponent, LoadingSpinnerComponent, InputSearchComponent],
   imports: [
     CommonModule,
     AppRoutingModule
@@ -16,7 +17,8 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
   exports: [
     MainNavigationComponent,
     MainFooterComponent,
-    EventDetailsSideNavigationComponent
+    EventDetailsSideNavigationComponent,
+    InputSearchComponent
   ]
 })
 export class MainElementsModule { }

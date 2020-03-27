@@ -20,10 +20,13 @@ export class UsersComponent implements OnInit {
   showNextBtn = true;
 
   private getUsersPage(startPointDoc = null, nextPage = false, prevPage = false) {
-    
-    this.dataService.getSystemUsers(startPointDoc).then((usersResponse: any) => {
+    console.log('startPointDoc', startPointDoc);
+
+
+    this.dataService.getSystemUsersV2(startPointDoc, this.searchWord).then((usersResponse: any) => {
       if(this.stillLoading) { this.stillLoading = false; }
       if(this.stillLoadingUsersPage) { this.stillLoadingUsersPage = false; }
+      
       if(!usersResponse.length) {
         this.showNextBtn = false;
       } else {
@@ -48,7 +51,6 @@ export class UsersComponent implements OnInit {
           this.showPrevBtn = false;
         }
       }
- 
     }, (error: any) => {
       console.log('error', error);
     });
@@ -66,13 +68,45 @@ export class UsersComponent implements OnInit {
 
   prevPage() {
     this.stillLoadingUsersPage = true;
+    this.pagesFirstDocuments.pop();
+    this.pagesLastDocuments.pop();
+
     if(this.pagesFirstDocuments.length === 1) {
       this.getUsersPage();
     } else {
-      this.pagesFirstDocuments.pop();
-      this.pagesLastDocuments.pop();
       this.getUsersPage(this.pagesFirstDocuments[this.pagesFirstDocuments.length - 1]);
     }
+  }
+
+  searchUsers(searchWord) {
+    console.log('Search by: ', searchWord);
+
+    this.searchWord = searchWord;
+
+    this.stillLoadingUsersPage = true;
+    this.users = [];
+    this.pagesFirstDocuments = [];
+    this.pagesLastDocuments = [];
+    this.showPrevBtn = false;
+    this.showNextBtn = true;
+
+    this.getUsersPage(null, true);
+
+  }
+
+  resetSearchUsers() {
+    console.log('reset search....');
+    this.searchWord = '';
+
+    this.stillLoadingUsersPage = true;
+    this.users = [];
+    this.pagesFirstDocuments = [];
+    this.pagesLastDocuments = [];
+    this.showPrevBtn = false;
+    this.showNextBtn = true;
+    
+
+    this.getUsersPage(null, true);
   }
 
 }

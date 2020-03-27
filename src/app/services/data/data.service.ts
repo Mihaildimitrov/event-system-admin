@@ -92,6 +92,16 @@ export class DataService {
     });
   }
 
+  getSystemUsersV2(startDoc: any = null, searchWord: string = '') {
+    return new Promise((resolve, reject) => {
+      return this.database.getSystemUsersV2(startDoc, searchWord).then((result: any) => {
+          resolve(result);
+        }).catch(function(error: any) {
+          reject(error);
+        });
+    });
+  }
+
 
   // ========================================================================
   // Event CRUD:

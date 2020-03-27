@@ -16,6 +16,35 @@ body {
     // text-decoration: none;
     // display: inline-block;
     // cursor: pointer;
+    &:disabled {
+        background-color: #1d2531;
+        border-color: #1d2531;
+        box-shadow: none;
+        opacity: 0.5;
+    }
+}
+
+.block-click {
+    pointer-events: none;
+}
+
+.opacity-5 {
+    opacity: .5;
+}
+
+.button-outline-no-border {
+    background-color: transparent;
+    border: none;
+    color: #1d2531;
+    // text-align: center;
+    // text-decoration: none;
+    // display: inline-block;
+    // cursor: pointer;
+    &:disabled {
+        background-color: transparent;
+        box-shadow: none;
+        opacity: 0.5;
+    }
 }
 
 .button:not(:last-child) {
@@ -153,11 +182,11 @@ form {
 
 .width-80 {
     width: 80%;
-} 
+}
 
 .width-20 {
     width: 20%;
-} 
+}
 
 .content-view-loading-outer {
     height: 100%;
@@ -170,11 +199,8 @@ form {
     display: flex;
     align-items: center;
     justify-content: center;
-    .content-view-loading-inner {
-
-    }
+    .content-view-loading-inner {}
 }
-
 
 // TOGGLE
 .switch {

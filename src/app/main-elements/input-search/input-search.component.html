@@ -1,0 +1,6 @@
+<div class="input-search-container">
+    <input [value]="value" (input)="value = $event.target.value" type="text">
+    <button [disabled]="!value.length" (click)="search()" class="button">{{searchButtonText}}</button>
+    <span [ngClass]="{'block-click opacity-5': !value.length}" (click)="reset()"><i class="fas fa-undo"></i></span>
+    <!-- <button [disabled]="!value.length" (click)="reset()" class="button-outline-no-border">reset</button> -->
+</div>
