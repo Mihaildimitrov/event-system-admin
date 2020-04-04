@@ -18,17 +18,19 @@ ul {
             outline: none;
         }
         span {
-            min-width: 35px;
-            display: inline-block;
+            min-width: 100%;
+            display: block;
+            text-align: center;
             i {
-                padding-right: 5px;
-                font-size: 1.4rem;
-                vertical-align: middle;
+                padding-bottom: 5px;
+                font-size: 1.5rem;
             }
         }
         a {
             color: inherit;
-            vertical-align: middle;
+            font-size: .9em;
+            text-align: center;
+            display: block;
         }
     }
     .features_list {
