@@ -4,13 +4,12 @@ ul {
         font-size: 1rem;
         cursor: pointer;
         color: #a1abb1;
+        position: relative;
         &:hover {
-            // background: #25303f;
             color: #fff;
             font-weight: 500;
         }
         &.active {
-            // background: #25303f;
             color: #fff;
             font-weight: 500;
         }
@@ -34,25 +33,49 @@ ul {
         }
     }
     .features_list {
-        transition: .4s linear;
-        max-height: 0;
-        overflow: hidden;
-        &:hover {
-            max-height: 500vh;
-        }
+        position: absolute;
+        visibility: hidden;
+        background: #1d2531;
+        opacity: 0;
+        transform: translateX(50px);
+        z-index: 9999;
+        top: 0;
+        // width: 150px; // Style 1
+        border-radius: 0 10px 10px 0; // Style 1
+        flex-wrap: wrap; // Style 2
+        display: flex; // Style 2
+        width: 300px; // Style 2
+        width: 200px; // Style 3
         li {
             cursor: pointer;
             font-size: 1rem;
-            padding-left: 20px;
+            // flex: 1 0 25%; // Style 2
+            // min-width: 33%; // Style 2
+            // min-width: 33.333%; // Style 2
+            // max-width: 33.333%; // Style 2
+            flex: 1 0 50%; // Style 3
+            min-width: 50%; // Style 3
+            min-width: 50%; // Style 3
+            max-width: 50%; // Style 3
             span {
+                // display: inline-block; // Style 1
+                // padding-right: 10px; // Style 1
+                // min-width: 30px; // Style 1
                 i {
                     font-size: 1rem;
                 }
+            }
+            a {
+                // display: inline-block; // Style 1
             }
         }
     }
 }
 
-.menu_item_dropdown:hover+.features_list {
-    max-height: 100vh;
+.menu_item_dropdown:hover .features_list {
+    // max-height: 100vh;
+    left: 100px;
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0px);
 }
