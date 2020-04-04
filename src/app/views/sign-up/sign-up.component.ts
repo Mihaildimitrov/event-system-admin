@@ -56,17 +56,6 @@ export class SignUpComponent implements OnInit {
         this.signUpFormLoadingNow = false;
         this.signUpFormWrong = true;
       });
-      
-      // this.authService.signUpUser(this.signUpForm.value.email, this.signUpForm.value.password, this.signUpForm.value.firstName, this.signUpForm.value.lastName, '/assets/img/user-avatar.png').then((result: any) => {
-      //   this.signUpFormLoadingNow = false;
-      //   this.signUpFormSuccess = true;
-      //   setTimeout(() => {
-      //     this.router.navigate(['/dashboard']);
-      //   }, 1000);
-      // }, (error: any) => {
-      //   this.signUpFormLoadingNow = false;
-      //   this.signUpFormWrong = true;
-      // });
     }
 
   }

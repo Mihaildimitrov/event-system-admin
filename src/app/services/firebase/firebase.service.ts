@@ -99,16 +99,19 @@ export class FirebaseService {
       const body = { 
         userEmail: email,
         userPassword: password,
-        userFirstName: firstName,
-        userLastName: lastName,
-        userRole: role,
+        userFirstName: firstName.toLowerCase(),
+        userLastName: lastName.toLowerCase(),
+        userRole: role.toLowerCase(),
         userImageUrl: userImage,
         searchTerms: [firstName.toLowerCase(), lastName.toLowerCase(), email.toLowerCase(), email.split('@')[0].toLowerCase(), role.toLowerCase()]
       };
-      console.log(this.http);
       this.http.post('https://us-central1-event-system-49b35.cloudfunctions.net/signUpUser', body, { headers }).subscribe({
-          next: data => {
-            resolve(true);
+          next: (data: any) => {
+            if(data.data.code === 'auth/email-already-exists') {
+              reject(data.data.code);
+            } else {
+              resolve(true);
+            }
           },
           error: error => {
             console.error('There was an error!', error);

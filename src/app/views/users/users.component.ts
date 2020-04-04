@@ -1,3 +1,5 @@
+import { AuthService } from 'src/app/services/authentication/auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data/data.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private authService: AuthService) { }
 
   stillLoading: boolean = true;
   stillLoadingUsersPage: boolean = false;
@@ -19,9 +21,31 @@ export class UsersComponent implements OnInit {
   showPrevBtn = false;
   showNextBtn = true;
 
-  private getUsersPage(startPointDoc = null, nextPage = false, prevPage = false) {
-    console.log('startPointDoc', startPointDoc);
 
+  showCreateUserModal: boolean = false;
+  isCreatingUser: boolean = false;
+  userCreatedSuccessfullyAlertVisibility: boolean = false;
+  newUserFormIsDirty: boolean = false;
+  newUserFormWrong: boolean = false;
+  newUserFormUserExist: boolean = false;
+  newUserForm = new FormGroup({
+    email: new FormControl('',[
+      Validators.required,
+      Validators.email
+    ]),
+    password: new FormControl(''),
+    firstName: new FormControl(''),
+    lastName: new FormControl('')
+  });
+
+  private showUserCreateSuccessfullyMessage() {
+    this.userCreatedSuccessfullyAlertVisibility = true;
+    setTimeout(() => {
+      this.userCreatedSuccessfullyAlertVisibility = false;
+    }, 5000);
+  }
+
+  private getUsersPage(startPointDoc = null, nextPage = false, prevPage = false) {
 
     this.dataService.getSystemUsersV2(startPointDoc, this.searchWord).then((usersResponse: any) => {
       if(this.stillLoading) { this.stillLoading = false; }
@@ -79,34 +103,61 @@ export class UsersComponent implements OnInit {
   }
 
   searchUsers(searchWord) {
-    console.log('Search by: ', searchWord);
-
     this.searchWord = searchWord;
-
     this.stillLoadingUsersPage = true;
     this.users = [];
     this.pagesFirstDocuments = [];
     this.pagesLastDocuments = [];
     this.showPrevBtn = false;
     this.showNextBtn = true;
-
     this.getUsersPage(null, true);
-
   }
 
   resetSearchUsers() {
-    console.log('reset search....');
     this.searchWord = '';
-
     this.stillLoadingUsersPage = true;
     this.users = [];
     this.pagesFirstDocuments = [];
     this.pagesLastDocuments = [];
     this.showPrevBtn = false;
     this.showNextBtn = true;
-    
-
     this.getUsersPage(null, true);
   }
+
+  toggleModal () {
+    if(this.showCreateUserModal) {
+      this.newUserForm.reset();
+      this.newUserFormIsDirty = false;
+    }
+    this.showCreateUserModal = !this.showCreateUserModal;
+  }
+
+  onCreateUser() {
+    if(this.newUserForm.value.email !== "" && this.newUserForm.value.password !== "") {
+      this.isCreatingUser = true;
+      this.newUserFormIsDirty = true;
+      this.newUserFormWrong = false;
+      this.newUserFormUserExist = false;
+      
+      this.authService.signUpUserWithNODEJS(this.newUserForm.value.email, this.newUserForm.value.password, this.newUserForm.value.firstName, this.newUserForm.value.lastName, 'admin', '/assets/img/user-avatar.png').then((result: any) => {
+        this.isCreatingUser = false;
+        this.newUserForm.reset();
+        this.newUserFormIsDirty = false;
+        this.showCreateUserModal = !this.showCreateUserModal;
+        this.showUserCreateSuccessfullyMessage();
+        this.resetSearchUsers();
+      }, (error: any) => {
+        this.isCreatingUser = false;
+        if(error === 'auth/email-already-exists') {
+          this.newUserFormUserExist = true;
+        } else {
+          this.newUserFormWrong = true;
+        }
+      });
+    }
+
+  }
+
+  get getFormFieldRef() { return this.newUserForm.controls; }
 
 }
