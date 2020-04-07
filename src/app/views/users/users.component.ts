@@ -235,7 +235,7 @@ export class UsersComponent implements OnInit {
 
   onUserDeleted(userId: string) {
     console.log('Deleted User: ' + userId + ' . Must reload listing....');
-
+    this.resetSearchUsers();
   }
 
 }

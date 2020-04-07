@@ -213,7 +213,7 @@ export class FirebaseService {
       };
       let service_this = this;
 
-      if (body.photo === "") {
+      if (body.photo === "" || body.photo === '/assets/img/user-avatar.png') {
         console.log("No photo");
         signUpRequest();
       } else {
