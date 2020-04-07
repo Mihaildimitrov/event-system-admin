@@ -62,6 +62,16 @@ export class DataService {
     });
   }
 
+  signUpUserWithNODEJSV2(user: any) {
+    return new Promise((resolve, reject) => {
+      return this.database.signUpUserWithNODEJSV2(user).then((result: any) => {
+          resolve(result);
+        }).catch(function(error: any) {
+          reject(error);
+        });
+    });
+  }
+
   signOutUser() {
     return new Promise((resolve, reject) => {
       return this.database.signOutUser().then((result: any) => {
@@ -276,28 +286,18 @@ export class DataService {
         // Delete old icon image:
 
         // Save new icon image:
-        this.database
-          .uploadImage(
-            eventCode,
-            "settings/design/" + (new Date().getTime() + "_" + newCover.name),
-            newCover
-          )
-          .then((result: any) => {
+        this.database.uploadImage(eventCode, "settings/design/" + (new Date().getTime() + "_" + newCover.name), newCover).then((result: any) => {
             data.coverImg = result;
             allLoadedModules++;
 
             if (allLoadedModules === numberToLoad) {
-              module_this
-                .saveEventDesignData(eventCode, data)
-                .then((result: any) => {
-                  resolve(result);
-                })
-                .catch(function(error: any) {
-                  reject(error);
-                });
+              module_this.saveEventDesignData(eventCode, data).then((result: any) => {
+                resolve(result);
+              }).catch(function(error: any) {
+                reject(error);
+              });
             }
-          })
-          .catch(function(error: any) {
+          }).catch(function(error: any) {
             reject(error);
           });
       }

@@ -53,7 +53,9 @@
             width: 100%;
             margin-bottom: 0.5rem;
         }
-        input,
+        input[type=email],
+        input[type=password],
+        input[type=text],
         textarea,
         select {
             display: block;
@@ -88,7 +90,81 @@
     }
 }
 
+.upload-new-img-spinner {
+    padding: 10px;
+    small {
+        font-size: 1rem;
+        font-weight: bold;
+        padding-right: 10px;
+    }
+    mat-spinner {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+.input-file-label {
+    font-size: 1rem;
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.input-file-upload {
+    display: none;
+}
+
+.input-file-upload+label {
+    color: white;
+    background-color: #1d2531;
+    max-width: 80%;
+    font-size: 1rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+}
+
+.upload-new-img-spinner-label {
+    display: block;
+    width: 20% !important;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 0.8rem !important;
+    font-weight: normal !important;
+    padding: 10px 0 !important;
+}
+
+.input-file-upload+label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    margin-right: 0.25em;
+}
+
+.image-preview-container {
+    width: 100%;
+    padding: 10px;
+    img {
+        max-width: 15%;
+    }
+}
+
 .create-user-container ::ng-deep .mat-progress-spinner circle,
 .mat-spinner circle {
     stroke: #e9760a;
+}
+
+.upload-new-img-spinner ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #1d2531;
+}
+
+.upload-new-img-spinner,
+.upload-new-img-spinner-label {
+    display: inline-block;
+    vertical-align: middle;
 }

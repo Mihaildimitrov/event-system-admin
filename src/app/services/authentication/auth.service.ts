@@ -96,6 +96,16 @@ export class AuthService {
     });
   }
 
+  signUpUserWithNODEJSV2(user: any) {
+    return new Promise((resolve, reject) => {
+      return this.dataService.signUpUserWithNODEJSV2(user).then((result: any) => {
+        resolve(result);
+      }).catch(function(error: any) {
+        reject(error);
+      });
+    });
+  }
+
   signOutUser() {
     return new Promise((resolve, reject) => {
       return this.dataService.signOutUser().then((result: any) => {

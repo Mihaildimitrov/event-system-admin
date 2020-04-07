@@ -2,8 +2,12 @@
     <div class="mb-col-sm-1 text-align-center user-column img-box">
         <img src="{{user.user_image}}" alt="">
     </div>
-    <div class="mb-col text-align-left user-column">{{user.first_name | titlecase }}</div>
-    <div class="mb-col text-align-left user-column">{{user.last_name | titlecase }}</div>
+    <div *ngIf="user.first_name !== ''" class="mb-col text-align-left user-column">{{user.first_name | titlecase }}</div>
+    <div *ngIf="user.first_name === ''" class="mb-col text-align-left user-column">-</div>
+    <div *ngIf="user.last_name !== ''" class="mb-col text-align-left user-column">{{user.last_name | titlecase }}</div>
+    <div *ngIf="user.last_name === ''" class="mb-col text-align-left user-column">-</div>
+    <div *ngIf="user.company_name !== ''" class="mb-col text-align-left user-column">{{user.company_name | titlecase }}</div>
+    <div *ngIf="user.company_name === ''" class="mb-col text-align-left user-column">-</div>
     <div class="mb-col text-align-left user-column">{{user.email}}</div>
     <div class="mb-col-sm-1 text-align-left user-column">{{user.role}}</div>
     <div class="mb-col-sm-1 text-align-center user-column">

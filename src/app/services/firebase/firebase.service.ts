@@ -121,6 +121,74 @@ export class FirebaseService {
     });
   }
 
+  signUpUserWithNODEJSV2(user: any) {
+    return new Promise((resolve, reject) => {
+      const headers = {};
+      const body = {
+        email: user.email,
+        password: user.password,
+        role: user.role.toLowerCase(),
+        firstName: user.firstName.toLowerCase(),
+        lastName: user.lastName.toLowerCase(),
+        photo: user.photo,
+        companyName: user.companyName.toLowerCase(),
+        userSponsorLevel: user.userSponsorLevel.toLowerCase(),
+        boothNumber: user.boothNumber.toLowerCase(),
+        company: user.company.toLowerCase(),
+        position: user.position.toLowerCase(),
+        description: user.description.toLowerCase(),
+        searchTerms: [
+          user.email.toLowerCase(), 
+          user.email.split('@')[0].toLowerCase(), 
+          user.role.toLowerCase(),
+          user.firstName.toLowerCase(), 
+          user.lastName.toLowerCase(), 
+          user.companyName.toLowerCase(), 
+          user.userSponsorLevel.toLowerCase(), 
+          user.boothNumber.toLowerCase(), 
+          user.company.toLowerCase(),
+          user.position.toLowerCase(),
+          user.description.toLowerCase()
+        ]
+      };
+      let service_this = this;
+
+      if(body.photo === '') {
+        console.log('No photo');
+        signUpRequest()
+      } else {
+        console.log('Upload Photo');
+        // Save image:
+        this.uploadImageFile("users/images/" + (new Date().getTime() + "_" + body.photo.name), body.photo).then((result: any) => {
+          console.log('result', result);
+          body.photo = result;
+          signUpRequest();
+        }).catch(function(error: any) {
+          console.log('error', error);
+          reject(false);
+        });
+      }
+
+
+      function signUpRequest() {
+        service_this.http.post('https://us-central1-event-system-49b35.cloudfunctions.net/signUpUserV2', body, { headers }).subscribe({
+          next: (data: any) => {
+            if(data.data.code === 'auth/email-already-exists') {
+              reject(data.data.code);
+            } else {
+              resolve(true);
+            }
+          },
+          error: error => {
+            console.error('There was an error!', error);
+            reject(false);
+          }
+        });
+      }
+
+    });
+  }
+
   signOutUser() {
     return new Promise((resolve, reject) => {
       this.AUTH.signOut().then(function(success) {
@@ -419,30 +487,42 @@ export class FirebaseService {
 
   uploadImage(eventCode, fullPath, imgFile) {
     return new Promise((resolve, reject) => {
-      let metadata = {
-        contentType: imgFile.type
-      };
+      let metadata = { contentType: imgFile.type };
 
-      let uploadTask = this.FS.ref()
-        .child(eventCode)
-        .child(fullPath)
-        .put(imgFile, metadata);
-      // Listen for state changes, errors, and completion of the upload.
-      uploadTask.on(
-        "state_changed", // or firebase.storage.TaskEvent.STATE_CHANGED
-        function(snapshot) {
+      let uploadTask = this.FS.ref().child(eventCode).child(fullPath).put(imgFile, metadata);
+      uploadTask.on("state_changed", function(snapshot) {
           switch (snapshot.state) {
-            case "paused": // or firebase.storage.TaskState.PAUSED
+            case "paused":
               break;
-            case "running": // or firebase.storage.TaskState.RUNNING
+            case "running":
               break;
           }
-        },
-        function(error) {
+        }, function(error) {
           reject(error);
-        },
-        function(done) {
-          // Upload completed successfully, now we can get the download URL
+        }, function(done) {
+          uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            resolve(downloadURL);
+          });
+        }
+      );
+    });
+  }
+
+  uploadImageFile(fullPath, imgFile) {
+    return new Promise((resolve, reject) => {
+      let metadata = { contentType: imgFile.type };
+
+      let uploadTask = this.FS.ref().child(fullPath).put(imgFile, metadata);
+      uploadTask.on("state_changed", function(snapshot) {
+          switch (snapshot.state) {
+            case "paused":
+              break;
+            case "running":
+              break;
+          }
+        }, function(error) {
+          reject(error);
+        }, function(done) {
           uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
             resolve(downloadURL);
           });

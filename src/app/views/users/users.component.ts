@@ -21,13 +21,29 @@ export class UsersComponent implements OnInit {
   showPrevBtn = false;
   showNextBtn = true;
 
-
+  userPhotoSrcValue: any = '../../../../assets/img/no_img.png';
   showCreateUserModal: boolean = false;
   isCreatingUser: boolean = false;
   userCreatedSuccessfullyAlertVisibility: boolean = false;
   newUserFormIsDirty: boolean = false;
   newUserFormWrong: boolean = false;
   newUserFormUserExist: boolean = false;
+  uploadingNewUserPhoto: boolean = false;
+  validUserRoles: Array<string> = [
+    'administrator',
+    'admin',
+    'attendee',
+    'speaker',
+    'exhibitor',
+    'sponsor'
+  ];
+  validUserSponsorLevels: Array<string> = [
+    'bronze',
+    'silver',
+    'gold',
+    'platinum'
+  ];
+  currentSelectedUserRole: string = '';
   newUserForm = new FormGroup({
     email: new FormControl('',[
       Validators.required,
@@ -35,14 +51,20 @@ export class UsersComponent implements OnInit {
     ]),
     password: new FormControl(''),
     firstName: new FormControl(''),
-    lastName: new FormControl('')
+    lastName: new FormControl(''),
+    company: new FormControl(''),
+    position: new FormControl(''),
+    description: new FormControl(''),
+    companyName: new FormControl(''),
+    userSponsorLevel: new FormControl(''),
+    boothNumber: new FormControl(''),
+    userPhoto: new FormControl(''),
+    userRole: new FormControl('')
   });
 
   private showUserCreateSuccessfullyMessage() {
     this.userCreatedSuccessfullyAlertVisibility = true;
-    setTimeout(() => {
-      this.userCreatedSuccessfullyAlertVisibility = false;
-    }, 5000);
+    setTimeout(() => { this.userCreatedSuccessfullyAlertVisibility = false; }, 5000);
   }
 
   private getUsersPage(startPointDoc = null, nextPage = false, prevPage = false) {
@@ -68,6 +90,8 @@ export class UsersComponent implements OnInit {
         } else {}
   
         this.users = usersResponse.map(x => x.data());
+
+        console.log('this.users', this.users);
 
         if(this.pagesFirstDocuments.length >= 2) {
           this.showPrevBtn = true;
@@ -125,25 +149,45 @@ export class UsersComponent implements OnInit {
   }
 
   toggleModal () {
+    this.currentSelectedUserRole = '';
     if(this.showCreateUserModal) {
       this.newUserForm.reset();
       this.newUserFormIsDirty = false;
     }
     this.showCreateUserModal = !this.showCreateUserModal;
+    this.userPhotoSrcValue = '../../../../assets/img/no_img.png';
   }
 
   onCreateUser() {
-    if(this.newUserForm.value.email !== "" && this.newUserForm.value.password !== "") {
+
+    if(this.newUserForm.value.email !== "" && this.newUserForm.value.password !== "" && this.newUserForm.value.userRole !== "") {
       this.isCreatingUser = true;
       this.newUserFormIsDirty = true;
       this.newUserFormWrong = false;
       this.newUserFormUserExist = false;
-      
-      this.authService.signUpUserWithNODEJS(this.newUserForm.value.email, this.newUserForm.value.password, this.newUserForm.value.firstName, this.newUserForm.value.lastName, 'admin', '/assets/img/user-avatar.png').then((result: any) => {
+
+      let userObjectTosave = {
+        email: this.newUserForm.value.email,
+        password: this.newUserForm.value.password,
+        role: this.newUserForm.value.userRole,
+        firstName: this.newUserForm.value.firstName || '',
+        lastName: this.newUserForm.value.lastName || '',
+        photo: this.newUserForm.value.userPhoto || '/assets/img/user-avatar.png',
+        companyName: this.newUserForm.value.companyName || '',
+        userSponsorLevel: this.newUserForm.value.userSponsorLevel || '',
+        boothNumber: this.newUserForm.value.boothNumber || '',
+        company: this.newUserForm.value.company || '',
+        position: this.newUserForm.value.position || '',
+        description: this.newUserForm.value.descriptio || ''
+      };
+      console.log('userObjectTosave', userObjectTosave);
+
+      this.authService.signUpUserWithNODEJSV2(userObjectTosave).then((result: any) => {
         this.isCreatingUser = false;
         this.newUserForm.reset();
         this.newUserFormIsDirty = false;
         this.showCreateUserModal = !this.showCreateUserModal;
+        this.userPhotoSrcValue = '../../../../assets/img/no_img.png';
         this.showUserCreateSuccessfullyMessage();
         this.resetSearchUsers();
       }, (error: any) => {
@@ -159,5 +203,34 @@ export class UsersComponent implements OnInit {
   }
 
   get getFormFieldRef() { return this.newUserForm.controls; }
+
+  setNewUserRole() { this.currentSelectedUserRole = this.newUserForm.value.userRole; }
+
+  onUserPhotoSelected(event) {
+    console.log(event);
+    this.uploadingNewUserPhoto = true;
+
+    if(event.target.files.length) {
+      let component_this = this;
+      let reader = new FileReader();
+      this.newUserForm.patchValue({userPhoto: event.target.files[0]});
+      console.log('imgToUpload', event.target.files[0]);
+
+      if (/^image\//i.test(event.target.files[0].type)) {
+          reader.onloadend = function(e) {
+            component_this.userPhotoSrcValue = reader.result;
+            component_this.uploadingNewUserPhoto = false;
+          };
+          reader.onerror = function(error) {
+            console.log(error);
+            component_this.uploadingNewUserPhoto = false;
+          };
+          reader.readAsDataURL(event.target.files[0]);
+      } 
+    } else {
+      console.log('Cancel ICON file upload!');
+    }
+
+  } 
 
 }

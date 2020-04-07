@@ -105,6 +105,13 @@ body {
     display: inline-block;
 }
 
+.required-form-field {
+    color: red;
+    padding-left: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
 .modal {
     .modal-card-head {
         border-bottom: 1px solid #1d2531;
@@ -182,6 +189,10 @@ form {
 
 .pading-right-10 {
     padding-right: 10px;
+}
+
+.pading-left-10 {
+    padding-left: 10px;
 }
 
 .width-80 {
