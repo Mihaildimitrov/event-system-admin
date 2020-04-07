@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
 import { FirebaseService } from "./../firebase/firebase.service";
 import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class DataService {
   private database: any;
@@ -24,9 +24,12 @@ export class DataService {
 
   sendPasswordResetEmail(email: string) {
     return new Promise((resolve, reject) => {
-      return this.database.sendPasswordResetEmail(email).then((result: any) => {
+      return this.database
+        .sendPasswordResetEmail(email)
+        .then((result: any) => {
           resolve(result);
-        }).catch(function(error: any) {
+        })
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -34,29 +37,58 @@ export class DataService {
 
   signInUser(email: string, password: string) {
     return new Promise((resolve, reject) => {
-      return this.database.signInUser(email, password).then((result: any) => {
+      return this.database
+        .signInUser(email, password)
+        .then((result: any) => {
           resolve(result);
-        }).catch(function(error: any) {
+        })
+        .catch(function (error: any) {
           reject(error);
         });
     });
   }
 
-  signUpUser(email: string, password: string, firstName: string, lastName: string, userImage: string) {
+  signUpUser(
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    userImage: string
+  ) {
     return new Promise((resolve, reject) => {
-      return this.database.signUpUser(email, password, firstName, lastName, userImage).then((result: any) => {
+      return this.database
+        .signUpUser(email, password, firstName, lastName, userImage)
+        .then((result: any) => {
           resolve(result);
-        }).catch(function(error: any) {
+        })
+        .catch(function (error: any) {
           reject(error);
         });
     });
   }
 
-  signUpUserWithNODEJS(email: string, password: string, firstName: string, lastName: string, role: string, userImage: string) {
+  signUpUserWithNODEJS(
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    role: string,
+    userImage: string
+  ) {
     return new Promise((resolve, reject) => {
-      return this.database.signUpUserWithNODEJS(email, password, firstName, lastName, role, userImage).then((result: any) => {
+      return this.database
+        .signUpUserWithNODEJS(
+          email,
+          password,
+          firstName,
+          lastName,
+          role,
+          userImage
+        )
+        .then((result: any) => {
           resolve(result);
-        }).catch(function(error: any) {
+        })
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -64,9 +96,12 @@ export class DataService {
 
   signUpUserWithNODEJSV2(user: any) {
     return new Promise((resolve, reject) => {
-      return this.database.signUpUserWithNODEJSV2(user).then((result: any) => {
+      return this.database
+        .signUpUserWithNODEJSV2(user)
+        .then((result: any) => {
           resolve(result);
-        }).catch(function(error: any) {
+        })
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -74,9 +109,12 @@ export class DataService {
 
   signOutUser() {
     return new Promise((resolve, reject) => {
-      return this.database.signOutUser().then((result: any) => {
+      return this.database
+        .signOutUser()
+        .then((result: any) => {
           resolve(result);
-        }).catch(function(error: any) {
+        })
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -84,9 +122,12 @@ export class DataService {
 
   getUserFields(uid: string) {
     return new Promise((resolve, reject) => {
-      return this.database.getUserFields(uid).then((result: any) => {
+      return this.database
+        .getUserFields(uid)
+        .then((result: any) => {
           resolve(result);
-        }).catch(function(error: any) {
+        })
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -94,24 +135,45 @@ export class DataService {
 
   getSystemUsers(startDoc: any = null) {
     return new Promise((resolve, reject) => {
-      return this.database.getSystemUsers(startDoc).then((result: any) => {
+      return this.database
+        .getSystemUsers(startDoc)
+        .then((result: any) => {
           resolve(result);
-        }).catch(function(error: any) {
+        })
+        .catch(function (error: any) {
           reject(error);
         });
     });
   }
 
-  getSystemUsersV2(startDoc: any = null, searchWord: string = '') {
+  getSystemUsersV2(startDoc: any = null, searchWord: string = "") {
     return new Promise((resolve, reject) => {
-      return this.database.getSystemUsersV2(startDoc, searchWord).then((result: any) => {
+      return this.database
+        .getSystemUsersV2(startDoc, searchWord)
+        .then((result: any) => {
           resolve(result);
-        }).catch(function(error: any) {
+        })
+        .catch(function (error: any) {
           reject(error);
         });
     });
   }
 
+  // ========================================================================
+  // Users:
+
+  deleteUser(userId: string = '') {
+    return new Promise((resolve, reject) => {
+      return this.database
+        .deleteUser(userId)
+        .then((result: any) => {
+          resolve(result);
+        })
+        .catch(function (error: any) {
+          reject(error);
+        });
+    });
+  }
 
   // ========================================================================
   // Event CRUD:
@@ -122,7 +184,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -135,7 +197,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -148,7 +210,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -161,7 +223,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -176,7 +238,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -189,7 +251,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -204,7 +266,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -217,7 +279,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -232,7 +294,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -271,12 +333,12 @@ export class DataService {
                 .then((result: any) => {
                   resolve(result);
                 })
-                .catch(function(error: any) {
+                .catch(function (error: any) {
                   reject(error);
                 });
             }
           })
-          .catch(function(error: any) {
+          .catch(function (error: any) {
             reject(error);
           });
       }
@@ -286,18 +348,28 @@ export class DataService {
         // Delete old icon image:
 
         // Save new icon image:
-        this.database.uploadImage(eventCode, "settings/design/" + (new Date().getTime() + "_" + newCover.name), newCover).then((result: any) => {
+        this.database
+          .uploadImage(
+            eventCode,
+            "settings/design/" + (new Date().getTime() + "_" + newCover.name),
+            newCover
+          )
+          .then((result: any) => {
             data.coverImg = result;
             allLoadedModules++;
 
             if (allLoadedModules === numberToLoad) {
-              module_this.saveEventDesignData(eventCode, data).then((result: any) => {
-                resolve(result);
-              }).catch(function(error: any) {
-                reject(error);
-              });
+              module_this
+                .saveEventDesignData(eventCode, data)
+                .then((result: any) => {
+                  resolve(result);
+                })
+                .catch(function (error: any) {
+                  reject(error);
+                });
             }
-          }).catch(function(error: any) {
+          })
+          .catch(function (error: any) {
             reject(error);
           });
       }
@@ -308,7 +380,7 @@ export class DataService {
           .then((result: any) => {
             resolve(result);
           })
-          .catch(function(error: any) {
+          .catch(function (error: any) {
             reject(error);
           });
       }
@@ -322,7 +394,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -335,7 +407,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -348,7 +420,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -376,11 +448,11 @@ export class DataService {
               .then((result: any) => {
                 resolve(result);
               })
-              .catch(function(error: any) {
+              .catch(function (error: any) {
                 reject(error);
               });
           })
-          .catch(function(error: any) {
+          .catch(function (error: any) {
             reject(error);
           });
       } else {
@@ -389,7 +461,7 @@ export class DataService {
           .then((result: any) => {
             resolve(result);
           })
-          .catch(function(error: any) {
+          .catch(function (error: any) {
             reject(error);
           });
       }
@@ -403,7 +475,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -419,7 +491,7 @@ export class DataService {
         .then((result: any) => {
           resolve(result);
         })
-        .catch(function(error: any) {
+        .catch(function (error: any) {
           reject(error);
         });
     });
@@ -447,7 +519,7 @@ export class DataService {
               .then((result: any) => {
                 checkIfAllLangsSaved(result);
               })
-              .catch(function(error: any) {
+              .catch(function (error: any) {
                 reject(error);
               });
           } else {
@@ -468,5 +540,4 @@ export class DataService {
 
   // ========================================================================
   // Event:
-
 }

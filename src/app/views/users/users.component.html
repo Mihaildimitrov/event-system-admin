@@ -27,7 +27,7 @@
 
     <div class="users-list-container padding-10">
         <div *ngIf="!stillLoadingUsersPage && users.length" class="list-box">
-            <app-users-list [users]="users"></app-users-list>
+            <app-users-list [users]="users" (userDeleted)="onUserDeleted($event)"></app-users-list>
         </div>
         <div *ngIf="!users.length && !stillLoadingUsersPage" class="users-list-empty-box padding-10 text-align-center">
             There are no users!

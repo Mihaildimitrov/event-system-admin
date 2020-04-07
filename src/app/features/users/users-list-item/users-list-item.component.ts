@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { DataService } from 'src/app/services/data/data.service';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-users-list-item',
@@ -7,15 +8,28 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class UsersListItemComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   @Input() user: any;
+  @Output() userDeleted = new EventEmitter<string>();
+  showDeleteUserModal: Boolean = false;
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  doRemoveUser() {
+    // TODO: Show spinner:
+    this.dataService.deleteUser(this.user.uid).then((response: any) => {
+      // TODO: Hide spinner:
+      this.userDeleted.emit(this.user.uid);
+      this.showDeleteUserModal = !this.showDeleteUserModal;
+    }, (error: any) => {
+      console.log('error', error);
+
+    });
   }
 
   toggleModalRemoveUser() {
-    
+    this.showDeleteUserModal = !this.showDeleteUserModal;
   }
 
 }

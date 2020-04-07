@@ -17,3 +17,26 @@
         </div>
     </div>
 </div>
+
+
+<div id="delete_user_modal" class="modal" [class.is-active]="showDeleteUserModal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Delete User</p>
+            <button (click)="toggleModalRemoveUser()" class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+
+            <h3>Delete user
+                <b *ngIf="user.first_name !== '' || user.last_name !== ''">{{user.first_name | titlecase }} {{user.last_name | titlecase }}</b>
+                <b *ngIf="user.company_name !== ''">{{user.company_name | titlecase }}</b> . Are you sure?
+            </h3>
+
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-danger" (click)="doRemoveUser()">Delete</button>
+            <button class="button" (click)="toggleModalRemoveUser()">Cancel</button>
+        </footer>
+    </div>
+</div>

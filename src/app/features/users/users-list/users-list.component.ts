@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-users-list',
@@ -10,8 +10,11 @@ export class UsersListComponent implements OnInit {
   constructor() { }
 
   @Input() users: any;
+  @Output() userDeleted = new EventEmitter<string>();
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  onUserDeleted(userId: string) {
+    this.userDeleted.emit(userId);
   }
-
 }
