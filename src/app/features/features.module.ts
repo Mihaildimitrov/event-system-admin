@@ -1,3 +1,4 @@
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './../app-routing.module';
 import { NgModule } from '@angular/core';
@@ -9,6 +10,7 @@ import { UsersListComponent } from './users/users-list/users-list.component';
 import { UsersListItemComponent } from './users/users-list-item/users-list-item.component';
 import { TranslationsListComponent } from './translations/translations-list/translations-list.component';
 import { TranslationsListItemComponent } from './translations/translations-list-item/translations-list-item.component';
+import { CreateUserModalComponent } from './users/create-user-modal/create-user-modal.component';
 
 
 @NgModule({
@@ -21,12 +23,14 @@ import { TranslationsListItemComponent } from './translations/translations-list-
     UsersListComponent,
     UsersListItemComponent,
     TranslationsListComponent,
-    TranslationsListItemComponent
+    TranslationsListItemComponent,
+    CreateUserModalComponent
   ],
   imports: [
     CommonModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     EventsListComponent,
@@ -34,6 +38,7 @@ import { TranslationsListItemComponent } from './translations/translations-list-
     EventsListNavigationComponent,
     UsersListComponent,
     UsersListItemComponent,
+    CreateUserModalComponent,
     TranslationsListComponent,
     TranslationsListItemComponent
   ]
