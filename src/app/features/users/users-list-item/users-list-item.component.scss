@@ -46,3 +46,23 @@
         }
     }
 }
+
+.delete-user-container {
+    padding: 0 10px;
+    small {
+        display: inline-block;
+        padding-right: 5px;
+        font-size: 1rem;
+        font-weight: bold;
+        padding-right: 10px;
+    }
+    .mat-spinner {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+.delete-user-container ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #e9760a;
+}

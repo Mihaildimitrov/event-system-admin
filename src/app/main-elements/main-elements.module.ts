@@ -7,9 +7,10 @@ import { EventDetailsSideNavigationComponent } from './event-details-side-naviga
 import { SaveButtonComponent } from './save-button/save-button.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { InputSearchComponent } from './input-search/input-search.component';
+import { EmptyStateComponent } from './empty-state/empty-state.component';
 
 @NgModule({
-  declarations: [MainNavigationComponent, MainFooterComponent, EventDetailsSideNavigationComponent, SaveButtonComponent, LoadingSpinnerComponent, InputSearchComponent],
+  declarations: [MainNavigationComponent, MainFooterComponent, EventDetailsSideNavigationComponent, SaveButtonComponent, LoadingSpinnerComponent, InputSearchComponent, EmptyStateComponent],
   imports: [
     CommonModule,
     AppRoutingModule

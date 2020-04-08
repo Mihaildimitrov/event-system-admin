@@ -53,8 +53,6 @@ export class UsersComponent implements OnInit {
   
         this.users = usersResponse.map(x => x.data());
 
-        console.log('this.users', this.users);
-
         if(this.pagesFirstDocuments.length >= 2) {
           this.showPrevBtn = true;
         } else {

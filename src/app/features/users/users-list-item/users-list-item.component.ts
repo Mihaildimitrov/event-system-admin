@@ -13,14 +13,15 @@ export class UsersListItemComponent implements OnInit {
   @Input() user: any;
   @Output() userDeleted = new EventEmitter<string>();
   showDeleteUserModal: Boolean = false;
+  isDeletingUser: Boolean = false;
 
   ngOnInit() {}
 
   doRemoveUser() {
-    // TODO: Show spinner:
+    this.isDeletingUser = true;
     this.dataService.deleteUser(this.user.uid).then((response: any) => {
-      // TODO: Hide spinner:
       this.userDeleted.emit(this.user.uid);
+      this.isDeletingUser = false;
       this.showDeleteUserModal = !this.showDeleteUserModal;
     }, (error: any) => {
       console.log('error', error);

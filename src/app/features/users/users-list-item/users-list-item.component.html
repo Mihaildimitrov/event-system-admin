@@ -35,6 +35,10 @@
 
         </section>
         <footer class="modal-card-foot">
+            <div *ngIf="isDeletingUser" class="delete-user-container">
+                <small>Deleting... </small>
+                <mat-spinner [diameter]="30"></mat-spinner>
+            </div>
             <button class="button is-danger" (click)="doRemoveUser()">Delete</button>
             <button class="button" (click)="toggleModalRemoveUser()">Cancel</button>
         </footer>
