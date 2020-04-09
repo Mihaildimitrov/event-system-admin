@@ -1,3 +1,4 @@
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainNavigationComponent } from './main-navigation/main-navigation.component';
@@ -10,17 +11,26 @@ import { InputSearchComponent } from './input-search/input-search.component';
 import { EmptyStateComponent } from './empty-state/empty-state.component';
 
 @NgModule({
-  declarations: [MainNavigationComponent, MainFooterComponent, EventDetailsSideNavigationComponent, SaveButtonComponent, LoadingSpinnerComponent, InputSearchComponent, EmptyStateComponent],
+  declarations: [
+    MainNavigationComponent, 
+    MainFooterComponent, 
+    EventDetailsSideNavigationComponent, 
+    SaveButtonComponent, 
+    LoadingSpinnerComponent, 
+    InputSearchComponent, 
+    EmptyStateComponent],
   imports: [
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MainNavigationComponent,
     MainFooterComponent,
     EventDetailsSideNavigationComponent,
     InputSearchComponent,
-    EmptyStateComponent
+    EmptyStateComponent,
+    LoadingSpinnerComponent
   ]
 })
 export class MainElementsModule { }

@@ -9,10 +9,17 @@ export class UserProfileComponent implements OnInit {
 
   @Input() userId: any;
 
+  stillLoadingContent: boolean = true;
+
   constructor() { }
 
   ngOnInit() {
     console.log('userId', this.userId);
+    
+    
+    setTimeout(() => {
+      this.stillLoadingContent = false;
+    }, 2000);
   }
 
 }

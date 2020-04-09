@@ -1,0 +1,17 @@
+.content-view-loading-inner ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #1d2531;
+}
+
+.content-view-loading-outer {
+    height: calc(100vh - 100px);
+    &.height-200 {
+        height: calc(100vh - 200px);
+    }
+    &.height-300 {
+        height: calc(100vh - 300px);
+    }
+    &.height-400 {
+        height: calc(100vh - 400px);
+    }
+}

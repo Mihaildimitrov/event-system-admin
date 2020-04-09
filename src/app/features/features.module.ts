@@ -1,3 +1,4 @@
+import { MainElementsModule } from './../main-elements/main-elements.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './../app-routing.module';
@@ -32,7 +33,8 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
     CommonModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MainElementsModule
   ],
   exports: [
     EventsListComponent,

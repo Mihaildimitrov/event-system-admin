@@ -1,1 +1,7 @@
-<p>User profile - {{userId}}</p>
+<app-loading-spinner *ngIf="stillLoadingContent"></app-loading-spinner>
+
+<div *ngIf="!stillLoadingContent" class="user-profile-data-container">
+
+
+    <p>User profile - {{userId}}</p>
+</div>
