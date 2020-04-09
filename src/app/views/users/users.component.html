@@ -30,7 +30,7 @@
             <app-users-list [users]="users" (userDeleted)="onUserDeleted($event)"></app-users-list>
         </div>
         <div *ngIf="!users.length && !stillLoadingUsersPage" class="users-list-empty-box padding-10 text-align-center">
-            There are no users!
+            <app-empty-state [message]="'No users yet'" [iconClasses]="'fas fa-users'"></app-empty-state>
         </div>
         <div *ngIf="stillLoadingUsersPage" class="mb-container-users content-view-loading-outer">
             <div class="content-view-loading-inner">

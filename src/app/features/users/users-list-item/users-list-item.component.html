@@ -12,7 +12,7 @@
     <div class="mb-col-sm-1 text-align-left user-column">{{user.role}}</div>
     <div class="mb-col-sm-1 text-align-center user-column">
         <div class="mb-row">
-            <span routerLink="" class="mb-col"><i class="fal fa-pen"></i></span>
+            <span routerLink="/user/{{user.uid}}" class="mb-col"><i class="fal fa-pen"></i></span>
             <span (click)="toggleModalRemoveUser()" class="mb-col"><i class="fal fa-trash"></i></span>
         </div>
     </div>

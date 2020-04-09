@@ -11,6 +11,7 @@ import { UsersListItemComponent } from './users/users-list-item/users-list-item.
 import { TranslationsListComponent } from './translations/translations-list/translations-list.component';
 import { TranslationsListItemComponent } from './translations/translations-list-item/translations-list-item.component';
 import { CreateUserModalComponent } from './users/create-user-modal/create-user-modal.component';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { CreateUserModalComponent } from './users/create-user-modal/create-user-
     UsersListItemComponent,
     TranslationsListComponent,
     TranslationsListItemComponent,
-    CreateUserModalComponent
+    CreateUserModalComponent,
+    UserProfileComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +42,8 @@ import { CreateUserModalComponent } from './users/create-user-modal/create-user-
     UsersListItemComponent,
     CreateUserModalComponent,
     TranslationsListComponent,
-    TranslationsListItemComponent
+    TranslationsListItemComponent,
+    UserProfileComponent
   ]
 })
 export class FeaturesModule { }

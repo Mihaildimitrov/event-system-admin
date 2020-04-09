@@ -19,7 +19,8 @@ import { EmptyStateComponent } from './empty-state/empty-state.component';
     MainNavigationComponent,
     MainFooterComponent,
     EventDetailsSideNavigationComponent,
-    InputSearchComponent
+    InputSearchComponent,
+    EmptyStateComponent
   ]
 })
 export class MainElementsModule { }
