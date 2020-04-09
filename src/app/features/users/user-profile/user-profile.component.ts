@@ -16,10 +16,15 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     console.log('userId', this.userId);
     
-    
+
     setTimeout(() => {
       this.stillLoadingContent = false;
     }, 2000);
+  }
+
+  tabChanged(event) {
+    console.log(event);
+    
   }
 
 }

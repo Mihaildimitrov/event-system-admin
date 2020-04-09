@@ -1,3 +1,4 @@
+import { MatTabsModule } from '@angular/material/tabs';
 import { MainElementsModule } from './../main-elements/main-elements.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -34,7 +35,8 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
     AppRoutingModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    MainElementsModule
+    MainElementsModule,
+    MatTabsModule
   ],
   exports: [
     EventsListComponent,

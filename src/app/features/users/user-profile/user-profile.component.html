@@ -1,7 +1,16 @@
 <app-loading-spinner *ngIf="stillLoadingContent"></app-loading-spinner>
 
-<div *ngIf="!stillLoadingContent" class="user-profile-data-container">
+<div *ngIf="!stillLoadingContent" class="padding-10 user-profile-data-container">
 
+    <mat-tab-group animationDuration="0ms" mat-align-tabs="center" (selectedTabChange)="tabChanged($event)">
 
-    <p>User profile - {{userId}}</p>
+        <mat-tab label="Profile" class="profile-data-tab">
+            <p>User profile - {{userId}}</p>
+        </mat-tab>
+
+        <mat-tab label="Events" class="profile-events-tab">
+            <p>User events - {{userId}}</p>
+        </mat-tab>
+
+    </mat-tab-group>
 </div>
