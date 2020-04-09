@@ -9,7 +9,10 @@ export class MyProfileComponent implements OnInit {
 
   constructor() { }
 
+  currentLoggedUserId: string = '';
+
   ngOnInit() {
+    this.currentLoggedUserId = JSON.parse(localStorage.getItem('loggedUserData')).uid;
   }
 
 }
